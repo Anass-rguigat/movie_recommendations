@@ -29,4 +29,4 @@ code .
    -ratings.csv
    -links.csv
    
-5. Enjoy
+5. flask run
