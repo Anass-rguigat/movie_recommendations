@@ -1,7 +1,10 @@
 # Recommender
 
 Build a recommendation engine using flask &amp; a Machine Learning  
-
+dataset from website movielens https://grouplens.org/datasets/movielens/.
+   -movies.csv
+   -ratings.csv
+   -links.csv
 ## Getting Started
 
 1. Clone the project and make it your own.
@@ -23,10 +26,8 @@ Use `.\venv\Scripts\activate` if on windows
 ```bash
 code .
 ```
-
-4. Install dataset from website movielens https://grouplens.org/datasets/movielens/.
-   -movies.csv
-   -ratings.csv
-   -links.csv
    
-5. flask run
+4. Run server
+   ```bash
+   flask run
+   ```
