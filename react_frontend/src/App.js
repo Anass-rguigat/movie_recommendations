@@ -1,11 +1,9 @@
-import './App.css';
+// src/App.js
+import React from 'react';
+import App from './components/App';
 
-function App() {
-  return (
-    <div className="App">
-      hii
-    </div>
-  );
-}
+const RootApp = () => {
+  return <App />;
+};
 
-export default App;
+export default RootApp;
