@@ -1,0 +1,8 @@
+.youtube-container {
+	overflow: hidden;
+	/* No clicking/hover effects */
+	pointer-events: none;}
+iframe{
+    width: 100%;
+    height: 100vh;
+}

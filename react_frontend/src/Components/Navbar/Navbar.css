@@ -1,0 +1,185 @@
+.navbar {
+    width: 100%;
+    height: 100px; /* Adjust as needed */
+    color: white;
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
+    box-sizing: border-box;
+    position: relative;
+}
+
+.nav-logo {
+    font-family: Outfit;
+    font-size: 42px;
+    font-weight: 500;
+    
+}
+.nav-menu {
+    display: flex;
+    align-items: center;
+    list-style: none;
+    font-size: 18px;
+    gap: 50px;
+}
+
+.nav-menu li {
+    /* Add position relative to allow absolute positioning of pseudo-element */
+    cursor: pointer;
+}
+.nav-link{
+    position: relative;
+}
+.nav-link a{
+  text-decoration: none;
+  color: inherit;
+}
+.nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: white;
+    transition: width 0.3s; /* Add transition for smooth animation */
+}
+
+.nav-link:hover::after {
+    width: 100%; /* Expand the line to cover the width of the link */
+}
+
+.nav-menu button {
+  width: 100px;
+  height: 20px;
+  overflow: hidden;
+  border: none;
+  color: #fff;
+  background: none;
+  position: relative;
+  padding-bottom: 2em;
+  cursor: pointer;
+}
+
+.nav-menu button > div,
+.nav-menu button > svg {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: flex;
+}
+
+.nav-menu button:before {
+  content: "";
+  position: absolute;
+  height: 2px;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  transform: scaleX(0);
+  transform-origin: bottom right;
+  background: currentColor;
+  transition: transform 0.25s ease-out;
+}
+
+.nav-menu button:hover:before {
+  transform: scaleX(1);
+  transform-origin: bottom left;
+}
+
+.nav-menu button .clone > *,
+.nav-menu button .text > * {
+  opacity: 1;
+  font-size: 1.2rem;
+  transition: 0.2s;
+  margin-left: 4px;
+}
+
+.nav-menu button .clone > * {
+  transform: translateY(60px);
+}
+
+.nav-menu button:hover .clone > * {
+  opacity: 1;
+  transform: translateY(0px);
+  transition: all 0.2s cubic-bezier(0.215, 0.61, 0.355, 1) 0s;
+}
+
+.nav-menu button:hover .text > * {
+  opacity: 1;
+  transform: translateY(-60px);
+  transition: all 0.2s cubic-bezier(0.215, 0.61, 0.355, 1) 0s;
+}
+
+.nav-menu button:hover .clone > :nth-child(1) {
+  transition-delay: 0.15s;
+}
+
+.nav-menu button:hover .clone > :nth-child(2) {
+  transition-delay: 0.2s;
+}
+
+.nav-menu button:hover .clone > :nth-child(3) {
+  transition-delay: 0.25s;
+}
+
+.nav-menu button:hover .clone > :nth-child(4) {
+  transition-delay: 0.3s;
+}
+.nav-menu button svg {
+    width: 20px;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%) rotate(-50deg);
+    transition: 0.2s ease-out;
+  }
+  
+  .nav-menu  button:hover svg {
+    transform: translateY(-50%) rotate(-90deg);
+  }
+  
+.burger-icon {
+    display: none;
+}
+@media (max-width: 768px) {
+    .nav-menu {
+        display: none;
+        flex-direction: column;
+        justify-content: center;
+        position: absolute;
+        top: 60px;
+        right: 0;
+        background-color: #262626;
+        padding: 15px;
+        border-radius: 8px;
+        min-height :100vh ;
+    }
+
+    .burger-icon {
+        display: block;
+        cursor: pointer;
+        font-size: 1.5em; /* Adjust the size as needed */
+    }
+
+    .nav-menu.open {
+        margin-top: 20px;
+        display: flex;
+        width: 100%;
+        background-color: #0e0d12;
+        height:auto;
+        z-index:2;
+    }
+    .nav-menu.open .nav-link:hover {
+        text-align: center;
+    }
+}
+
+header-home{
+    width: 100%;
+    max-width: 80%;
+    margin: auto;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    position: relative;
+}
