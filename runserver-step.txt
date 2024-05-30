@@ -1,0 +1,24 @@
+
+---------------flask--------------
+0- open bash
+1- python -m venv venv
+2- source ".\venv\Scripts\Activate"
+3- pip install Flask pandas scikit-learn
+4- export FLASK_APP=main.py
+5- flask run 
+(go do something else after running server because he take time...)
+-----------------reactJs------------
+0- open bash 
+1- npm install
+2- npm run dev 
+-------------------laravel ----------
+0- open bash 
+1- composer install 
+2- php artisan key:generate
+3- copy .env.example in .env
+5- create database
+4- php artisan migrate
+5- php artisan db:seed
+6- php artisan serv
+
+
