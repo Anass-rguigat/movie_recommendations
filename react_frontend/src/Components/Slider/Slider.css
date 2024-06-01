@@ -44,7 +44,8 @@
     left: 0;
     width: 0;
     height: 2px;
-    background-color: white;
+    background-color: #abeec3;
+    /* background-color: rgb(45, 207, 45); */
     transition: width 0.3s;
 }
 
@@ -140,12 +141,34 @@
 }
 .slider .list .item .content p:nth-child(1){
     text-transform: uppercase;
-    letter-spacing: 10px;
+    letter-spacing: 3px;
 }
 .slider .list .item .content h2{
-    font-size: 100px;
+    font-size: 60px;
     margin: 0;
 }
+/* -=-==-=-=-=-=-= -=-=-=- =-==- =-==- =- */
+/* add full caracters for title */
+.slider .content h2 {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+  }
+  
+  .full-title {
+    display: none;
+    transition: 3s;
+  }
+  
+  .slider .content h2:hover .full-title {
+    display: inline;
+  }
+  .slider .content h2:hover .pointsTitle {
+    display: none;
+  }
+
+
+/* -=-==-=-=-=-=-= -=-=-=- =-==- =-==- =- */
 
 
 .slider .list .item .content .btn {
@@ -221,7 +244,8 @@
 .slider .list .item.active p:nth-child(3),
 .slider .list .item.active .btn
 {
-    transform: translateY(30px);
+    transform: translateY(20px);
+    /* transform: translateY(30px); */
     filter: blur(20px);
     opacity: 0;
     animation: showContent .5s .7s ease-in-out 1 forwards;
@@ -248,12 +272,13 @@
     height: 40px;
     border-radius: 5px;
     font-size: x-large;
-    color: #eee;
+    color: #1b1f1d;
     transition: .5s;
 }
 .arrows button:hover{
     background-color: #eee;
-    color: black;
+    color: #079d3b;
+    /* color: black; */
 }
 .thumbnail{
     position: absolute;
@@ -274,12 +299,17 @@
     width: 0;
 }
 .thumbnail .item{
+    border-radius: 10px;
     width: 150px;
     height: 220px;
     filter: brightness(.5);
     transition: .5s;
     flex-shrink: 0;
     scroll-snap-align: start ;
+}
+.thumbnail .item:hover{
+    filter: brightness(.3);
+    box-shadow: 0px 1px 20px rgb(0, 106, 48);
 }
 .thumbnail .item img{
     width: 100%;
@@ -289,8 +319,20 @@
     color: #262626;
 }
 .thumbnail .item.active{
-    filter: brightness(1.5);
+    filter: brightness(1);
+    border-radius: 10px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    box-shadow: 0px 1px 20px rgb(0, 0, 0);
+    color: #00581f;
     color: #fff;
+    /* color: black; */ 
+    text-shadow: 1px 5px 10px rgb(15, 39, 9);
+    /* text-shadow: 2px 3px 5px #00581f; */
+}
+.thumbnail .item.active .item{
+   opacity: 0;
+   
 }
 .thumbnail .item .title{
     position: absolute;

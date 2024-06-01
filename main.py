@@ -1,6 +1,7 @@
 from flask import Flask, request, jsonify
 import logging
 import pandas as pd
+from flask_cors import CORS
 from model_evaluator import ModelEvaluator
 from popularity_recommender import PopularityRecommender
 from content_based import ContentBasedRecommender
@@ -11,6 +12,7 @@ from scipy.sparse.linalg import svds
 import numpy as np
 
 app = Flask(__name__)
+CORS(app) # This will allow all origins by default.
 
 # Load data and initialize recommendation model
 movies = pd.read_csv('ml-latest/movies.csv', header=0)
@@ -96,7 +98,7 @@ hybrid_model = HybridRecommender(cf_model=cf_recommender_model, cb_model=content
 
 
 # Define Flask routes
-@app.route('/recommendations-popularity', methods=['GET'])
+@app.route('/recommendations-popularity', methods=['POST'])
 def recommendation_popularity():
     try:
         # Get the user_id from the request JSON
@@ -123,7 +125,7 @@ def recommendation_popularity():
         logging.error(f"Error in recommendation_popularity: {e}")
         return jsonify({'error': 'Internal Server Error'}), 500 
     
-
+# -=-=-=-=- =-=-=-= -=-=-=- =-=-=-=
 @app.route('/recommendations-content_based', methods=['GET'])
 def recommendation_content():
     try:

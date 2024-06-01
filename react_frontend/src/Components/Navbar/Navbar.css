@@ -34,6 +34,9 @@
   text-decoration: none;
   color: inherit;
 }
+.nav-link a:hover{
+  color: #18c297;
+}
 .nav-link::after {
     content: '';
     position: absolute;
@@ -72,13 +75,13 @@
 .nav-menu button:before {
   content: "";
   position: absolute;
-  height: 2px;
+  height: 3px;
   bottom: 0;
   left: 0;
   width: 100%;
   transform: scaleX(0);
   transform-origin: bottom right;
-  background: currentColor;
+  background: #abeec3;
   transition: transform 0.25s ease-out;
 }
 
@@ -101,8 +104,10 @@
 
 .nav-menu button:hover .clone > * {
   opacity: 1;
-  transform: translateY(0px);
+  transform: translateY(-2.5px);
   transition: all 0.2s cubic-bezier(0.215, 0.61, 0.355, 1) 0s;
+  /* color: #abeec3; */
+  color: #18c297;
 }
 
 .nav-menu button:hover .text > * {

@@ -17,7 +17,7 @@ class PopularityRecommender:
     def recommend_items(self, user_id, items_to_ignore=[], topn=10, verbose=False):
         C = self.popularities_df['ratings_mean'].mean()
         
-        self.popularities_df['predicted_rating'] = self.popularities_df.apply(lambda x: self.weighted_rating(x,3.5,C), axis=1) 
+        self.popularities_df['predicted_rating'] = self.popularities_df.apply(lambda x: self.weighted_rating(x,10,C), axis=1) 
         
         recommendations_df = self.popularities_df[~self.popularities_df['movieId'].isin(items_to_ignore)].sort_values('predicted_rating', ascending=False).head(topn)
         return recommendations_df
