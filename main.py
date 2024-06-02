@@ -126,7 +126,7 @@ def recommendation_popularity():
         return jsonify({'error': 'Internal Server Error'}), 500 
     
 # -=-=-=-=- =-=-=-= -=-=-=- =-=-=-=
-@app.route('/recommendations-content_based', methods=['GET'])
+@app.route('/recommendations-content_based', methods=['POST'])
 def recommendation_content():
     try:
         # Get the user_id from the request JSON
@@ -163,7 +163,7 @@ def recommendation_content():
         logging.error(f"Error in recommendation_content based: {e}")
         return jsonify({'error': 'Internal Server Error'}), 500
 
-@app.route('/recommendations-collaborative', methods=['GET'])
+@app.route('/recommendations-collaborative', methods=['POST'])
 def recommendation_collaborative():
     try:
         # Get the user_id from the request JSON
@@ -202,7 +202,7 @@ def recommendation_collaborative():
 
 
 
-@app.route('/recommendations-hybrid', methods=['GET'])
+@app.route('/recommendations-hybrid', methods=['POST'])
 def recommendation_hybrid():
     try:
         # Get the user_id from the request JSON
@@ -239,7 +239,7 @@ def recommendation_hybrid():
         logging.error(f"Error in recommendation_hybrid: {e}")
         return jsonify({'error': 'Internal Server Error'}), 500
 
-@app.route('/recommendations-hybrid_search', methods=['GET'])
+@app.route('/recommendations-hybrid_search', methods=['POST'])
 def recommendation_hybrid_search():
     try:
         # Get the title from the request JSON
@@ -276,7 +276,7 @@ def recommendation_hybrid_search():
         logging.error(f"Error in recommendation_hybrid_title: {e}")
         return jsonify({'error': 'Internal Server Error'}), 500
 
-@app.route('/add-rating', methods=['GET'])
+@app.route('/add-rating', methods=['POST'])
 def add_rating():
     try:
         data = request.json

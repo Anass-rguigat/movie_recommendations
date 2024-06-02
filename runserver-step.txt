@@ -3,7 +3,7 @@
 0- open bash
 1- python -m venv venv
 2- source ".\venv\Scripts\Activate"
-3- pip install Flask pandas scikit-learn
+3- pip install Flask pandas scikit-learn numpy flask-cors
 4- export FLASK_APP=main.py
 5- flask run 
 (go do something else after running server because he take time...)

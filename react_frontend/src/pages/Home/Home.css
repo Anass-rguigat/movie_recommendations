@@ -1,5 +1,6 @@
 .header-home {
     position: relative;
     height: 100vh;
+    background-color: black;
     width: 100vw; /* Change from 100% to 100vw */
 }
