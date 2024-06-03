@@ -1,9 +1,11 @@
-import  { useState, useEffect } from 'react';
+import  { useState, useEffect  } from 'react';
 import './Slider.css'; // Import the CSS file
+import { useNavigate } from 'react-router-dom';
 import { getPopularityRecommendations } from '../../api/recommendations';
 
 const Slider = () => {
   const [itemActive, setItemActive] = useState(0);
+  const navigate = useNavigate();
 
 // -=-=-=-=-=-=-
 // getPopularityRecommendations
@@ -33,11 +35,11 @@ const Slider = () => {
 // -=-=-=-=-=-=-
   
   const nextSlide = () => {
-    setItemActive((prevIndex) => (prevIndex + 1) % items.length);
+    setItemActive((prevIndex) => (prevIndex + 1) % 10);
   };
 
   const prevSlide = () => {
-    setItemActive((prevIndex) => (prevIndex === 0 ? items.length - 1 : prevIndex - 1));
+    setItemActive((prevIndex) => (prevIndex === 0 ? 10 - 1 : prevIndex - 1));
   };
 
   useEffect(() => {
@@ -47,6 +49,10 @@ const Slider = () => {
 
   const handleThumbnailClick = (index) => {
     setItemActive(index);
+  };
+
+  const handleDetailsClick = (movie) => {
+    navigate('/detail', { state: { movie } });
   };
 
   return (
@@ -70,7 +76,7 @@ const Slider = () => {
               </h2>
               
               <p>{ movie.release_date } <br /> {movie.overview}</p>
-              <button className="btn">Details</button>
+              <button className="btn" onClick={() => handleDetailsClick(movie)} >Details</button>
             </div>
           </div>
         ))}
@@ -84,9 +90,19 @@ const Slider = () => {
       <div className="thumbnail">
         {movies.map((movie, index) => (
           <div key={index} className={index === itemActive ? "item active" : "item"} onClick={() => handleThumbnailClick(index)}>
-            <img src={`https://image.tmdb.org/t/p/original${movie.poster_path}`} alt={`Thumbnail ${index + 1}`} />
-            <div className="title">{movie.title.substring(0, 20)}</div>
+            <div>
+              <img src={`https://image.tmdb.org/t/p/original${movie.poster_path}`} alt={`Thumbnail ${index + 1}`} />
+              {/* <div className="title">{movie.title.substring(0, 24)}</div> */}
+              <div className="title">{movie.title.length > 24 ? (
+                  <>
+                    {movie.title.substring(0, 20)}<span className="pointsTitle"></span><span className="full-title">{movie.title.substring(20)}</span>
+                  </>
+                ) : (
+                  movie.title
+                )}</div>
+            </div>
           </div>
+          
         ))}
       </div>
     </div>

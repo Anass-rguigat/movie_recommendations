@@ -4,12 +4,17 @@ import MovieDetails from '../../Components/MovieDetails/MovieDetails'
 import Navbar from '../../Components/Navbar/Navbar'
 import './Detail.css'
 import { getUser } from '../../api/auth';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import Loading from "../../Components/loadingAnimation/Loading";
 
 const Detail = () => {
   const [user, setUser] = useState(null);
   const [error, setError] = useState(null);
+
+  const location = useLocation();
+  const { movie } = location.state || {}; 
+  // console.log(movie);
+  
   const navigate = useNavigate();
   // useEffect(() => {
   //   const fetchUser = async () => {
@@ -32,7 +37,7 @@ const Detail = () => {
       <header className="header-top">
             <Navbar />
             <div>
-                <MovieDetails />
+                <MovieDetails movie={movie}/>
             </div>
               <Footer />
         </header>

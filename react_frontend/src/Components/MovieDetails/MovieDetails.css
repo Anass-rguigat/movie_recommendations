@@ -8,6 +8,26 @@
     background-position: center;
 
   }
+  
+  /* 1 / */
+  .Movied {
+  background-image:linear-gradient(to top,
+    #000000 59%,
+    rgb(0, 0, 0) 70%,
+    rgba(0, 0, 0, 0.964) 73%,
+    rgba(0, 0, 0, 0.916) 75%,
+    rgba(0, 0, 0, 0.658) 80%, 
+    rgba(0, 0, 0, 0.514)100%
+    );
+  }
+
+  /* add style for parent div of content up in background-image */
+ .ad-contentUpBackground{
+    transition: transform 0.5s ease, visibility 0.5s ease;
+    transform: translateY(0); 
+  }
+
+  
   .background-image {
     position: absolute;
     top: 0;
@@ -16,6 +36,7 @@
     height: 100%;
     object-fit: cover;
     z-index: -1;
+    transition: 3s;
   }
   .background-image::before {
     content: '';
@@ -24,7 +45,6 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5));
     z-index: 1;
   }
   .moviedetail .title {
@@ -32,10 +52,16 @@
     padding: 20px 0;
     color: #fff;
   }
+
+
   
   .moviedetail .listProduct .item img {
     width: 90%;
     border-radius: 50%;
+  }
+  .moviedetail .listProduct {
+    width: 100%;
+    scroll-snap-type: y mandatory;
   }
   
   .moviedetail .listProduct {
@@ -166,6 +192,7 @@
   
   .Cast {
     margin-top: 100px;
+    min-height: 100px;
   }
   
   .Cast .listProduct {
@@ -202,6 +229,13 @@
     width: 90%;
     max-height: 150px;
     border-radius: 50%;
+    transition: .3s;
+  }
+  .Cast .listProduct .item img:hover {
+    transform: scale(110%);
+    /* border-radius: 45%; */
+    box-shadow:1px 0px 10px #151515;
+    border: solid 1px #9ffff4;
   }
   
   .Cast .listProduct .item .name {
@@ -211,16 +245,12 @@
     color: #fff;
   }
   .trailer .trailer-video{
+    margin-top: 50px;
+    height: 600px;
     width: 100%;
     margin-bottom: 20px;
   }
-  .Movied {
-    background-image:linear-gradient(to top,
-    #0e0d12 55%,
-    rgba(0,0,0,.7) 60%,
-    rgba(0,0,0,.7) 80%,
-    rgba(0,0,0,.7)100%);
-  }
+  
   
   /* // ipad */
   @media only screen and (max-width: 992px) {
@@ -256,4 +286,137 @@
       justify-content: center;
     }
   }
+
+/* -=-==-=-=-=-=-= -=-=-=- =-==- =-==- =- */
+/* add full caracters for title */
+.content h1 {
+  position: relative;
+  display: inline-block;
+}
+
+.full-title {
+  display: none;
+  transition: 3s;
+}
+
+.content h1:hover h1{
+  font-size: 20px;
+}
+.content h1:hover .full-title {
+  display: inline;
+}
+.content h1:hover .pointsTitle {
+  display: none;
   
+}
+
+
+/* -=-==-=-=-=-=-= -=-=-=- =-==- =-==- =- */
+/* button of show more-less  */
+.btns .button {
+  --😀: #000000;
+  --😀😀: #083530;
+  --😀😀😀: #002f3a63;
+  cursor: pointer;
+  margin-top: 40px;
+  margin-left: 15px;
+  width: 100px;
+  height: 30px;
+  font-size: 0.525em;
+  font-weight: 800;
+  letter-spacing: 2px;
+  color: #fff9f9;
+  background: var(--😀);
+  border: 2px solid var(--😀😀);
+  border-radius: .55rem;
+  box-shadow: 0 8px 0 var(--😀😀);
+  transform: skew(-14deg);
+  transition: all .1s ease;
+  filter: drop-shadow(0 3px 20px var(--😀😀😀));
+}
+
+.btns .button:active {
+  letter-spacing: 0px;
+  transform: skew(-10deg) translateY(8px);
+  box-shadow: 0 0 0 var(--😀😀😀);
+}
+
+
+/* -=-=- =-=- =-=-= -=-  */
+/* icon eyes  */
+/*------ Settings ------*/
+/*------ Settings ------*/
+.hamburger {
+  cursor: pointer;
+  margin : 100px ;
+  margin-left: 700px;
+  position : absolute;
+  z-index : 100;
+}
+
+.hamburger input {
+  display: none;
+}
+
+.hamburger svg {
+  /* The size of the SVG defines the overall size */
+  height: 3em;
+  /* Define the transition for transforming the SVG */
+  transition: transform 600ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.line {
+  fill: none;
+  stroke: white;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 3;
+  /* Define the transition for transforming the Stroke */
+  transition: stroke-dasharray 600ms cubic-bezier(0.4, 0, 0.2, 1),
+              stroke-dashoffset 600ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.line-top-bottom {
+  stroke-dasharray: 12 63;
+}
+
+.hamburger input:checked + svg {
+  transform: rotate(-45deg);
+  opacity: 0.5;
+}
+
+.hamburger input:checked + svg .line-top-bottom {
+  stroke-dasharray: 20 300;
+  stroke-dashoffset: -32.42;
+}
+
+/* css OF SLIDER ACTORS  */
+/* -=-=- =-=- =-=- =-= -  */
+/* .container {
+  overflow: auto;
+  display: flex;
+  scroll-snap-type: x mandatory;
+  width: 90%;
+  margin: 0 auto;
+  padding: 0 15px;
+}
+
+.card {
+  backdrop-filter: blur(7px);
+  -webkit-backdrop-filter: blur(7px);
+  margin: 1rem;
+  width: 100%;
+}
+
+.title {
+  width: 100%;
+  display: inline-block;
+  word-break: break-all;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-align: center;
+  margin: 1rem auto;
+} */
+
+

@@ -280,7 +280,60 @@
     color: #079d3b;
     /* color: black; */
 }
+
+.thumbnail::-webkit-scrollbar{
+    width: 0;
+}
+
+/* new  */
 .thumbnail{
+    position: absolute;
+    right:0;
+    bottom: 20px;
+    z-index: 11;
+    display: flex;
+    gap: 10px;
+    width: 55%;
+    height: 300px;
+    padding: 0 50px;
+    box-sizing: border-box;
+    overflow: auto;
+    justify-content: space-around;
+    scroll-snap-type: x mandatory;
+    cursor: ew-resize;
+}
+
+.thumbnail .item{
+    border-radius: 10px;
+    width: 180px;
+    height: 260px;
+    filter: brightness(.5);
+    transition: .5s;
+    flex-shrink: 0;
+    scroll-snap-align: start ;
+    cursor: default;
+    color: #00a05000;
+}
+.thumbnail .item:hover{
+    filter: brightness(.3);
+    box-shadow: 0px 1px 20px rgb(0, 106, 48);
+    color: #00a05084;
+}
+.thumbnail .item:hover img{
+    transform: scale(102%);
+}
+.thumbnail .item img{
+    width: 100%;
+    height: 260px;
+    object-fit: cover;
+    border-radius: 10px;
+    color: #262626;
+    transition: .3s;
+}
+
+/* -=-=-=-=-=-=-==-=-=-=-==-== -=-= */
+/* default */
+/* .thumbnail{
     position: absolute;
     right:0;
     bottom: 50px;
@@ -294,11 +347,10 @@
     overflow: auto;
     justify-content: space-around;
     scroll-snap-type: x mandatory;
-}
-.thumbnail::-webkit-scrollbar{
-    width: 0;
-}
-.thumbnail .item{
+    cursor: ew-resize;
+} */
+
+/* .thumbnail .item{
     border-radius: 10px;
     width: 150px;
     height: 220px;
@@ -306,6 +358,7 @@
     transition: .5s;
     flex-shrink: 0;
     scroll-snap-align: start ;
+    cursor: default;
 }
 .thumbnail .item:hover{
     filter: brightness(.3);
@@ -317,14 +370,13 @@
     object-fit: cover;
     border-radius: 10px;
     color: #262626;
-}
+} */
 .thumbnail .item.active{
     filter: brightness(1);
     border-radius: 10px;
     font-weight: bold;
     letter-spacing: 1px;
     box-shadow: 0px 1px 20px rgb(0, 0, 0);
-    color: #00581f;
     color: #fff;
     /* color: black; */ 
     text-shadow: 1px 5px 10px rgb(15, 39, 9);
@@ -335,10 +387,11 @@
    
 }
 .thumbnail .item .title{
+    font-size: 14px;
     position: absolute;
     inset: auto 10px 10px 10px;
-    margin-bottom: 20px;
-    
+    /* margin-bottom: 20px; default */
+    margin-bottom: -30px;
 }
 .thumbnail .item .genre{
     position: absolute;

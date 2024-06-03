@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars } from '@fortawesome/free-solid-svg-icons';
 import './Navbar.css';
@@ -7,7 +7,9 @@ import { useNavigate , Link} from 'react-router-dom';
 
 const Navbar = () => {
     const [menuOpen, setMenuOpen] = useState(false);
+    const [scrolled, setScrolled] = useState(false);
     const navigate = useNavigate();
+
     const handleMenuToggle = () => {
         setMenuOpen(!menuOpen);
     };
@@ -20,9 +22,26 @@ const Navbar = () => {
           console.log('Failed to logout: '+ error.message);
         }
       };
+
+    useEffect(() => {
+        const handleScroll = () => {
+            if (window.scrollY > 50) {
+                setScrolled(true);
+            } else {
+                setScrolled(false);
+            }
+        };
+
+        window.addEventListener('scroll', handleScroll);
+
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+        };
+    }, []);
     
     return (
-        <div className="navbar">
+        <div className={`navbar ${scrolled ? 'scrolled' : ''}`}>
+        {/* <div className="navbar"> */}
             <div className="nav-logo">RANDMOVIE</div>
             <FontAwesomeIcon icon={faBars} className="burger-icon" onClick={handleMenuToggle} />
             <ul className={`nav-menu ${menuOpen ? 'open' : ''}`}>

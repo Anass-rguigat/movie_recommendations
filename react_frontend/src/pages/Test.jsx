@@ -48,6 +48,7 @@ const Test = () => {
               src={`https://www.youtube.com/embed/${trailer.results[1].key}?autoplay=1&mute=1&loop=1&color=white&controls=0&modestbranding=1&playsinline=1&rel=0&enablejsapi=1&showinfo=0`}
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
               allowFullScreen
+              controls
             ></iframe>
           </div>
           {actor && actor.cast.slice(0, 4).map((act, index) => (

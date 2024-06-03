@@ -1,13 +1,30 @@
 .navbar {
     width: 100%;
-    height: 100px; /* Adjust as needed */
+    height: 80px; /* Adjust as needed */
     color: white;
     display: flex;
     align-items: center;
     padding: 0 20px;
     box-sizing: border-box;
     position: relative;
+    z-index: 1000; /* Add z-index to appear above other content */
+    transition: background-color 0.3s ease;
 }
+
+.navbar.scrolled {
+  background-color: rgba(0, 0, 0, 0.8); 
+  background: linear-gradient(to bottom, rgba(30, 32, 32, 0.8)50%, rgba(0, 0, 0, 0)); 
+}
+
+/* .Movied {
+  background-image:linear-gradient(to top,
+  #000000 55%,
+  #000000 57%,
+  rgba(0, 0, 0, 0.7) 60%,
+  rgba(0, 0, 0, 0.7) 70%,
+  rgba(0, 0, 0, 0.7) 80%,
+  rgba(0, 0, 0, 0.7)100%);
+} */
 
 .nav-logo {
     font-family: Outfit;
@@ -51,6 +68,7 @@
 .nav-link:hover::after {
     width: 100%; /* Expand the line to cover the width of the link */
 }
+
 
 .nav-menu button {
   width: 100px;

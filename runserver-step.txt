@@ -5,6 +5,7 @@
 2- source ".\venv\Scripts\Activate"
 3- pip install Flask pandas scikit-learn
 4- export FLASK_APP=main.py
+   $env:FLASK_APP = "main.py"  $env:FLASK_ENV = "development"
 5- flask run 
 (go do something else after running server because he take time...)
 -----------------reactJs------------
