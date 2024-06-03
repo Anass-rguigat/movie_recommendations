@@ -1,23 +1,43 @@
 import './Background.css';
 import video1 from '../../assets/video1.mp4';
-import image1 from '../../assets/image1.jpg';
-import image2 from '../../assets/image2.jpg';
-import image3 from '../../assets/image3.jpg';
+import { useEffect, useState } from 'react';
+import axios from 'axios';
 
-const Background = ({ playStatus, heroCount }) => {
+const Background = ({ heroData, playStatus, heroCount }) => {
+    const [trailer, setTrailer] = useState(null);
+
+    useEffect(() => {
+        const fetchMovieData = async () => {
+            try {
+                const trailerResponse = await axios.get(`https://api.themoviedb.org/3/movie/${heroData.tmdbId}/videos?api_key=82630e4c1f743f98068c95b3a28f8d6c&language=en-US`);
+                setTrailer(trailerResponse.data);
+            } catch (error) {
+                console.error('Error fetching movie data:', error);
+            }
+        };
+
+        if (heroData) {
+            fetchMovieData();
+        }
+    }, [heroData]);
+
     if (playStatus) {
-        return (
-            <video className='background fade-in' autoPlay loop >
-                <source src={video1} type='video/mp4' />
-                Your browser does not support the video tag.
-            </video>
-        );
-    } else if (heroCount === 0) {
-        return <img src={image1} className='background fade-in' alt='' />;
-    } else if (heroCount === 1) {
-        return <img src={image2} className='background fade-in' alt='' />;
-    } else if (heroCount === 2) {
-        return <img src={image3} className='background fade-in' alt='' />;
+        if (trailer && trailer.results && trailer.results.length > 0) {
+            const videoKey = trailer.results[0].key;
+            return (
+                <iframe
+                className='background fade-in'
+                src={`https://www.youtube.com/embed/${videoKey}?autoplay=1&loop=1&controls=0&showinfo=0`}
+                frameBorder="0"
+                allowFullScreen
+            ></iframe>
+            );
+        } else {
+            // Handle the case when trailer is not available
+            return null;
+        }
+    } else if (heroData && heroData.backdrop_path) {
+        return <img src={`https://image.tmdb.org/t/p/original${heroData.backdrop_path}`} className='background fade-in' alt='' />;
     } else {
         return null;
     }

@@ -4,18 +4,28 @@ import Navbar from "../../Components/Navbar/Navbar";
 import Hero from "../../Components/Hero/Hero";
 import Card from "../../Components/Cards/Card";
 import Footer from "../../Components/Footer/Footer";
-import { getUser } from '../../api/auth';
-import { useNavigate } from 'react-router-dom';
-import Loading from "../../Components/loadingAnimation/Loading";
-
+//import { getUser } from '../../api/auth';
+import { getHybridRecommendations } from '../../api/hybrid';
 
 const Home = () => {
-  const [user, setUser] = useState(null);
-  const [error, setError] = useState(null);
-  const navigate = useNavigate();
-  const heroData = [
-    { title: "The Winter King ", description: "A former warrior, now turned monk, tells the story of how Arthur became the lord of war despite the illegitimacy of his throne.", genre: "CRIME - FANTASY - DRAMA -HISTORY", rating: 4 },
-  ];
+  const [heroData, setHeroData] = useState([]);
+    const userId = 4;
+    useEffect(() => {
+        const fetchRecommendations = async () => {
+            try {
+                const data = await getHybridRecommendations();
+                setHeroData(data);
+            } catch (error) {
+                console.error('Error fetching recommendations:', error);
+            }
+        };
+
+        fetchRecommendations();
+
+    }, [userId]);
+ //const [user, setUser] = useState(null);
+  //const [error, setError] = useState(null);
+  //const navigate = useNavigate();
   const [heroCount, setHeroCount] = useState(0);
   const [playStatus, setPlayStatus] = useState(false);
   // useEffect(() => {
@@ -31,13 +41,13 @@ const Home = () => {
 
   //   fetchUser();
   // }, []);
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setHeroCount((count) => (count + 1) % heroData.length);
-    }, 2000);
+  //useEffect(() => {
+  //  const interval = setInterval(() => {
+  //    setHeroCount((count) => (count + 1) % 3 );
+  //  }, 6000);
 
-    return () => clearInterval(interval);
-  }, [heroData.length]);
+  //  return () => clearInterval(interval);
+  //}, []);
 
 
 
@@ -46,9 +56,9 @@ const Home = () => {
     {/* {error ? (
       <p>Error: {error}</p>
     ) : user ? ( */}
-    <div>
+    <div className="home">
       <header className="header-home" >
-        <Background playStatus={playStatus} heroCount={heroCount} />
+        <Background heroData={heroData[0]} playStatus={playStatus} heroCount={heroCount} />
         <Navbar />
         
         <Hero
@@ -59,7 +69,7 @@ const Home = () => {
           setHeroCount={setHeroCount}
         />
       </header>
-        <Card />
+        <Card heroData={heroData.slice(1)}/>
         <Footer />
     </div>
     {/* // ) : (

@@ -23,8 +23,9 @@
 
 .hero-text .genre {
     width: 100%; /* Set width to 100% for better responsiveness */
-    font-size: 0.8em; /* Use relative units */
-    margin-top: 25px;
+    font-size: 1em; /* Use relative units */
+    margin-top: 15px;
+    font-weight: 900;
 }
 
 .rating {
