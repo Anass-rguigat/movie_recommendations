@@ -5,7 +5,10 @@
 
 .hero-text {
     color: #FFF;
-    margin-top: 180px; /* Use relative units */
+    padding: 5px;
+    border-radius: 10px;
+    margin-top: 180px; 
+    text-shadow: 3px 4px 10px #000000;
     font-weight: 500;
 }
 
@@ -19,6 +22,8 @@
     width: 50%; /* Set width to 100% for better responsiveness */
     font-size: 1em; /* Use relative units */
     margin-top: 10px; /* Added margin for spacing */
+    border-radius: 5px;
+    text-shadow: 1px 1px 5px #000000;
 }
 
 .hero-text .genre {
@@ -253,3 +258,7 @@
         border-radius: 5px;
     }
 }
+
+.hero.hidden-content > :not(.hero-dot-play) {
+    visibility: hidden;
+  }

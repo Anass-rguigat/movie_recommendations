@@ -14,7 +14,7 @@ const tmdbApi = axios.create({
 export const getHybridRecommendations = async () => {
   try {
     // Use a POST request and send user_id in the body with value 1 or any value of id not important
-    const response = await flaskApi.post('/recommendations-hybrid', { user_id: 1 });
+    const response = await flaskApi.post('/recommendations-hybrid', { user_id: 2 });
     const recommendations = response.data;
     // console.log(recommendations);
 

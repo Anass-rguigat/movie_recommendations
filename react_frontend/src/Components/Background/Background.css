@@ -1,5 +1,5 @@
 .background {
-    height: 100vh;
+    height: 110vh;
     width: 100%;
     object-fit: cover;
     position: absolute;
@@ -10,6 +10,9 @@
     z-index: -1;
     padding: none;
     float: left;
+    margin-top: -60px;
+    /* opacity: 1.5; */
+    filter: brightness(.5);
 }
 
 .header-home {

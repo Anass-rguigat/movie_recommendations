@@ -3,13 +3,18 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar, faStarHalfAlt, faStar as farStar } from '@fortawesome/free-solid-svg-icons';
 import play_icon from '../../assets/play_icon.png';
 import pause_icon from '../../assets/pause_icon.png';
+import { useState } from 'react';
 
 const Hero = ({ heroData, setPlayStatus, playStatus }) => {
-  const maxLengthDesc = 250
-  const maxLength =20
+    const [isHeroContentVisible, setIsHeroContentVisible] = useState(true);
+    const maxLengthDesc = 250
+    const maxLength =20
+    console.log(heroData);
+
     const renderStars = (rating) => {
         const totalStars = 5;
         let stars = [];
+
         for (let i = 1; i <= totalStars; i++) {
             if (rating >= i) {
                 stars.push(<FontAwesomeIcon key={i} icon={faStar} className="star filled" />);
@@ -22,8 +27,13 @@ const Hero = ({ heroData, setPlayStatus, playStatus }) => {
         return stars;
     };
 
+    const handlePlayClick = () => {
+        setPlayStatus(!playStatus);
+        setIsHeroContentVisible(!isHeroContentVisible);
+    };
+
     return (
-        <div className="hero">
+        <div className={`hero ${isHeroContentVisible ? '' : 'hidden-content'}`}>
             {heroData && heroData.title && (
                 <div className="hero-text">
                     <p className='title'>
@@ -46,7 +56,8 @@ const Hero = ({ heroData, setPlayStatus, playStatus }) => {
                     </p>
                     <p className='genre'>{heroData.genres.map(genre => genre.name).join(" - ")}</p>
                     <div className='rating'>
-                        {renderStars(heroData.vote_average)}
+                        {renderStars(heroData.average_rating)}
+                        {/* {renderStars(heroData.vote_average)} */}
                     </div>
                 </div>
             )}
@@ -54,7 +65,8 @@ const Hero = ({ heroData, setPlayStatus, playStatus }) => {
             <div className="hero-dot-play">
                 <ul className="hero-dots"></ul>
                 <div className="hero-play">
-                    <img onClick={() => setPlayStatus(!playStatus)} src={playStatus ? pause_icon : play_icon} alt="" />
+                    <img onClick={handlePlayClick} src={playStatus ? pause_icon : play_icon} alt="" />
+                    {/* <img onClick={() => setPlayStatus(!playStatus) } src={playStatus ? pause_icon : play_icon} alt="" /> */}
                     <p>See the trailer</p>
                 </div>
             </div>
