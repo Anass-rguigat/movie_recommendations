@@ -419,3 +419,62 @@
 } */
 
 
+/* -=-= -=-= -=-=-= -=-= -alertsweeet 2 =-=-=-=-=-=-  */
+
+.custom-swal-popup{
+  background-image: linear-gradient(216deg, rgba(11,12,11, 0.05) 0%, rgba(11,12,11, 0.05) 25%,rgba(79,78,78, 0.05) 25%, rgba(79,78,78, 0.05) 38%,rgba(94,85,85, 0.05) 38%, rgba(94,85,85, 0.05) 75%,rgba(40,39,39, 0.05) 75%, rgba(40,39,39, 0.05) 100%),linear-gradient(44deg, rgba(45,83,27, 0.05) 0%, rgba(45,83,27, 0.05) 34%,rgba(40,39,39, 0.05) 34%, rgba(40,39,39, 0.05) 57%,rgba(94,85,85, 0.05) 57%, rgba(94,85,85, 0.05) 89%,rgba(37,38,37, 0.05) 89%, rgba(37,38,37, 0.05) 100%),linear-gradient(241deg, rgba(0,0,0, 0.05) 0%, rgba(0,0,0, 0.05) 14%,rgba(40,39,39, 0.05) 14%, rgba(40,39,39, 0.05) 60%,rgba(40,39,39, 0.05) 60%, rgba(40,39,39, 0.05) 69%,rgba(40,39,39, 0.05) 69%, rgba(40,39,39, 0.05) 100%),linear-gradient(249deg, rgba(40,39,39, 0.05) 0%, rgba(40,39,39, 0.05) 32%,rgba(0,0,0, 0.05) 32%, rgba(0,0,0, 0.05) 35%,rgba(0,0,0, 0.05) 35%, rgba(0,0,0, 0.05) 51%,rgba(0,0,0, 0.05) 51%, rgba(0,0,0, 0.05) 100%),linear-gradient(92deg, rgb(32,32,32),rgb(32,32,32));
+  border-radius: 20px;
+}
+
+.custom-swal-popup .swal2-title {
+  color: #757474; 
+  text-shadow: 1px 2px 5px black;
+}
+
+.custom-swal-popup .swal2-icon {
+  background-color: transparent !important; 
+}
+
+.swal2-success.swal2-icon-show .swal2-success-circular-line-right{
+  display: none;
+}
+.swal2-success .swal2-success-fix{
+  display: none;
+}
+.swal2-success-circular-line-left{
+  display: none;
+}
+
+.btn-success{
+  color:rgb(0, 159, 29);
+  color: #facea8;
+  border: 1px solid #0a9700;
+  border: 1px solid #facea8;
+  background-color: #093406;
+  font-size: 15px;
+  padding: 10px;
+  margin-left: 10px;
+  border-radius: 7px;
+  transition: .4s;
+  cursor: pointer;
+}
+.btn-success:hover{
+  background-color: #0a9700;
+  color: wheat;
+}
+.btn-danger{
+  color:#facea8;
+  /* color:#facea8; */
+  border: 1px solid #ffffff;
+  border: 1px solid #facea8;
+  background-color: #4c0503;
+  font-size: 15px;
+  padding: 10px;
+  margin-left: 10px;
+  border-radius: 7px;
+}
+.btn-danger:hover{
+  background-color: #d70f08;
+  color: wheat;
+}
+

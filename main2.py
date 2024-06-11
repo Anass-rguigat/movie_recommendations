@@ -13,7 +13,7 @@ import numpy as np
 import threading
 
 app = Flask(__name__)
-CORS(app)  # This will allow all origins by default.
+CORS(app) # This will allow all origins by default.
 
 # Initialize a lock for thread-safe writing
 lock = threading.Lock()
@@ -32,10 +32,10 @@ ids = movies[movies['year'] < threshold_date]['movieId'].values
 training_data = ratings[ratings['movieId'].isin(ids)]
 testing_data = ratings[~ratings['movieId'].isin(ids)]
 
-# Evaluator
+#evaluator
 model_evaluator = ModelEvaluator(training_data, testing_data)
 
-# Content-based filtering
+#content
 def check_name(x):
     words = x.split()
     return all(x[0].isupper() and x[1:].islower() for x in words if len(x) > 1)
@@ -53,46 +53,46 @@ movies_ids = expended_movies_df['movieId'].values.tolist()
 expended_movies_df['soup'] = [" ".join(tags[tags['movieId'] == id]['tag'].values.tolist()) for id in movies_ids]
 
 def fill_empty_tag(x):
-    if x['soup'] == '':
+    if x['soup'] == '' :
         return " ".join(x['genres'].lower().split('|'))
     return x['soup']
 
 expended_movies_df['soup'] = expended_movies_df.apply(lambda x: fill_empty_tag(x), axis=1)
 
-count = CountVectorizer(stop_words='english')
+count = CountVectorizer(stop_words = 'english')
 count_matrix = count.fit_transform(expended_movies_df['soup'])
 content_based_recommender_model = ContentBasedRecommender(expended_movies_df['movieId'].values.tolist(), count_matrix, training_data, testing_data)
 
-# Popularity-based filtering
-popularity = ratings.groupby('movieId').agg({'rating': ['mean', 'count']}).reset_index()
-popularity.columns = ['movieId', 'ratings_mean', 'ratings_count']
+#popularity 
+popularity = ratings.groupby('movieId').agg({'rating':['mean', 'count']}).reset_index()
+popularity.columns = ['movieId','ratings_mean', 'ratings_count']
 popularity = popularity.sort_values(by='ratings_mean', ascending=False)
 popularity_model = PopularityRecommender(popularity)
 
-# Collaborative filtering
-def create_cf_model(ratings):
-    users_items_pivot_matrix_df = ratings.pivot(index='userId', columns='movieId', values='rating').fillna(0)
-    users_items_pivot_matrix = users_items_pivot_matrix_df.values
+#collaborative filtering 
+users_items_pivot_matrix_df = ratings.pivot(index='userId', columns='movieId', values='rating').fillna(0)
 
-    NUMBER_OF_FACTORS_MF = 15
-    U, sigma, Vt = svds(users_items_pivot_matrix, k=NUMBER_OF_FACTORS_MF)
+users_items_pivot_matrix = users_items_pivot_matrix_df.values 
 
-    sigma = np.diag(sigma)
-    all_user_predicted_ratings = np.dot(np.dot(U, sigma), Vt)
+NUMBER_OF_FACTORS_MF = 15
+U, sigma, Vt = svds(users_items_pivot_matrix, k = NUMBER_OF_FACTORS_MF)
 
-    preds_df = pd.DataFrame(all_user_predicted_ratings, columns=users_items_pivot_matrix_df.columns, index=users_items_pivot_matrix_df.index)
-    
-    def normalize(value, old_max, old_min, new_max=5.0, new_min=0.0):
-        old_range = (old_max - old_min)
-        new_range = (new_max - new_min)
-        return (((value - old_min) * new_range) / old_range) + new_min
+sigma = np.diag(sigma)
 
-    preds_df = preds_df.apply(lambda x: normalize(x, all_user_predicted_ratings.max(), all_user_predicted_ratings.min()))
-    return CFRecommender(preds_df)
+all_user_predicted_ratings = np.dot(np.dot(U, sigma), Vt)
 
-cf_recommender_model = create_cf_model(ratings)
+preds_df = pd.DataFrame(all_user_predicted_ratings, columns=users_items_pivot_matrix_df.columns, index = users_items_pivot_matrix_df.index)
 
-# Hybrid filtering
+def normalize(value, old_max, old_min, new_max=5.0, new_min=0.0):
+    old_range = (old_max - old_min)
+    new_range = (new_max - new_min)
+    return (((value - old_min) * new_range) / old_range) + new_min
+
+preds_df = preds_df.apply(lambda x: normalize(x, all_user_predicted_ratings.max(), all_user_predicted_ratings.min()))
+
+cf_recommender_model = CFRecommender(preds_df)
+
+#hybrid 
 hybrid_model = HybridRecommender(cf_model=cf_recommender_model, cb_model=content_based_recommender_model, expended_movies_df=expended_movies_df)
 
 @app.route('/recommendations-popularity', methods=['POST'])
@@ -109,7 +109,7 @@ def recommendation_popularity():
     except Exception as e:
         logging.error(f"Error in recommendation_popularity: {e}")
         return jsonify({'error': 'Internal Server Error'}), 500 
-
+    
 @app.route('/recommendations-content_based', methods=['POST'])
 def recommendation_content():
     try:
@@ -201,7 +201,6 @@ def add_rating():
         
         with lock:
             ratings = pd.concat([ratings, new_rating], ignore_index=True)
-            ratings.drop_duplicates(subset=['userId', 'movieId'], keep='last', inplace=True)
             ratings.to_csv('ml-latest/ratings.csv', index=False)
         
         # Re-train or update your models here if necessary

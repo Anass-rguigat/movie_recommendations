@@ -1,6 +1,7 @@
 .background {
-    height: 110vh;
+    height: 120vh;
     width: 100%;
+    margin-left: 0px;
     object-fit: cover;
     position: absolute;
     top: 0;

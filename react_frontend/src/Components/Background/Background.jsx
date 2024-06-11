@@ -1,10 +1,11 @@
 import './Background.css';
 import video1 from '../../assets/video1.mp4';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import axios from 'axios';
 
 const Background = ({ heroData, playStatus, heroCount }) => {
     const [trailer, setTrailer] = useState(null);
+    // let brightnesBackground = useRef(null);
 
     useEffect(() => {
         const fetchMovieData = async () => {
@@ -27,12 +28,16 @@ const Background = ({ heroData, playStatus, heroCount }) => {
             return (
                 <iframe
                 className='background fade-in'
+                style={{ filter : 'brightness(1)'}}
                 src={`https://www.youtube.com/embed/${videoKey}?autoplay=1&loop=1&controls=0&showinfo=0`}
                 frameBorder="0"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen"
                 allowFullScreen
             ></iframe>
-            );
+            
+
+
+        );
         } else {
             // Handle the case when trailer is not available
             return null;

@@ -42,7 +42,7 @@ class ContentBasedRecommender:
         similar_items = sorted([(self.items_ids[i], cosine_similarities[0, i]) for i in similar_indices], key=lambda x: -x[1])
         return similar_items
     
-    def recommend_items(self, user_id, items_to_ignore=[], topn=10):
+    def recommend_items(self, user_id, items_to_ignore=[], topn=30):
         similar_items = self.get_similar_items_to_user_profile(user_id)
         similar_items_filtered = list(filter(lambda x: x[0] not in items_to_ignore, similar_items))
         recommendations_df = pd.DataFrame(similar_items_filtered, columns=['movieId', 'predicted_rating']).head(topn)

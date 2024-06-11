@@ -17,7 +17,7 @@ const Footer = () => {
         
 
         <div className="row">
-          Copyright © 2024 - All rights reserved || Designed By: Rguigat Anass
+          Copyright © 2024 - All rights reserved || Designed By: Rguigat Anass & Fikri Adnan
         </div>
       </div>
     </footer>

@@ -13,8 +13,16 @@ const tmdbApi = axios.create({
 
 export const getPopularityRecommendations = async () => {
   try {
-    // Use a POST request and send user_id in the body with value 1 or any value of id not important
-    const response = await flaskApi.post('/recommendations-popularity', { user_id: 1 });
+
+    // Get the user ID from local storage
+    const userId = localStorage.getItem('userId');
+    if (!userId) {
+      throw new Error('User ID not found in local storage');
+    }
+    console.log(userId);
+    
+    // Use a POST request and send user_id in the body 
+    const response = await flaskApi.post('/recommendations-popularity', { user_id: userId });
     const recommendations = response.data;
     // console.log(recommendations);
 

@@ -5,85 +5,22 @@ import { getPopularityRecommendations } from '../../api/recommendations';
 
 const Slider = () => {
   const [itemActive, setItemActive] = useState(0);
+  const [movies, setMovie] = useState([]);
+  const userId = 1;
   const navigate = useNavigate();
-
+  
 // -=-=-=-=-=-=-
 // getPopularityRecommendations
 // -=-=-=-=-=-=-
-
-  const [movies, setMovie] = useState([]);
-  const userId = 1;
+  
 
   const maxLength = 24; 
-// List of slider items
-const items = [
-  {
-    "imageUrl": "https://i.postimg.cc/rFnb8n1b/img1.png",
-    "title": "Title 1",
-    "description": "Description 1",
-    "genre": "DRAMA - CRIME"
-  },
-  {
-    "imageUrl": "https://i.postimg.cc/tgLbkw0x/img2.jpg",
-    "title": "Title 2",
-    "description": "Description 2",
-    "genre": "DRAMA - CRIME"
-  },
-  {
-    "imageUrl": "https://i.postimg.cc/5278kq2J/img3.jpg",
-    "title": "Title 3",
-    "description": "Description 3",
-    "genre": "DRAMA - CRIME"
-  },
-  {
-    "imageUrl": "https://i.postimg.cc/mkpbGDzP/img4.jpg",
-    "title": "Title 4",
-    "description": "Description 4",
-    "genre": "Genre 4"
-  },
-  {
-    "imageUrl": "https://i.postimg.cc/mDxz0dxv/img5.jpg",
-    "title": "Title 5",
-    "description": "Description 5",
-    "genre": "Genre 5"
-  },
-  {
-    "imageUrl": "https://i.postimg.cc/rFnb8n1b/img1.png",
-    "title": "Title 6",
-    "description": "Description 6",
-    "genre": "Genre 6"
-  },
-  {
-    "imageUrl": "https://i.postimg.cc/tgLbkw0x/img2.jpg",
-    "title": "Title 7",
-    "description": "Description 7",
-    "genre": "Genre 7"
-  },
-  {
-    "imageUrl": "https://i.postimg.cc/5278kq2J/img3.jpg",
-    "title": "Title 8",
-    "description": "Description 8",
-    "genre": "Genre 8"
-  },
-  {
-    "imageUrl": "https://i.postimg.cc/mkpbGDzP/img4.jpg",
-    "title": "Title 9",
-    "description": "Description 9",
-    "genre": "Genre 9"
-  },
-  {
-    "imageUrl": "https://i.postimg.cc/rFnb8n1b/img1.png",
-    "title": "Title 10",
-    "description": "Description 10",
-    "genre": "Genre 10"
-  }
-]
   useEffect(() => {
     const fetchRecommendations = async () => {
       try {
         const data = await getPopularityRecommendations();
         setMovie(data);
-        console.log(data);
+        // console.log(data);
         // data[0].genres.map(genre => console.log(genre.name))
       } catch (error) {
         console.error('Error fetching recommendations:', error);

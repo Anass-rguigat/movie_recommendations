@@ -124,6 +124,7 @@
     font-weight: 500;
     text-align: center; /* Center text */
     margin: 10px 0; /* Adjust margin as needed */
+    margin-top: 20px;
 }
 
 /* Movie description */

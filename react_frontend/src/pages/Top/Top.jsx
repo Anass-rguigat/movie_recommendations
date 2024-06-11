@@ -9,33 +9,33 @@ const Top = () => {
   const [user, setUser] = useState(null);
   const [error, setError] = useState(null);
   const navigate = useNavigate();
-  // useEffect(() => {
-  //   const fetchUser = async () => {
-  //     try {
-  //       const response = await getUser();
-  //       setUser(response.user);
-  //     } catch (error) {
-  //       setError('Failed to fetch user data: ' + error.message);
-  //       navigate('/login')
-  //     }
-  //   };
+  useEffect(() => {
+    const fetchUser = async () => {
+      try {
+        const response = await getUser();
+        setUser(response.user);
+      } catch (error) {
+        setError('Failed to fetch user data: ' + error.message);
+        navigate('/login')
+      }
+    };
 
-  //   fetchUser();
-  // }, []);
+    fetchUser();
+  }, []);
   return (
     <>
-    {/* {error ? (
+    {error ? (
       <p>Error: {error}</p>
-    ) : user ? ( */}
+    ) : user ? (
         <header className="header-top">
             <Navbar />
             <div className="slider-container"> {/* Add a container for the slider */}
               <Slider />
             </div>
         </header>
-        {/* ) : (
+        ) : (
           <Loading />
-        )} */}
+        )} 
     </>
   );
 };

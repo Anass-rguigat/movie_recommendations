@@ -4,6 +4,12 @@ import './MovieDetails.css';
 import video1 from '../../assets/video1.mp4';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar, faStarHalfAlt, faStar as farStar } from '@fortawesome/free-solid-svg-icons';
+// -=-=-==- 
+// import { faStar as fasStar, faStarHalfAlt, faStar as farStar } from '@fortawesome/free-solid-svg-icons';
+// import { faStar as fasStar, faStarHalfAlt } from '@fortawesome/free-solid-svg-icons';
+import { faStar as farStarr } from '@fortawesome/free-regular-svg-icons';
+import Swal from 'sweetalert2';
+
 
 const MovieDetails = ({movie}) => {
 
@@ -15,8 +21,6 @@ const MovieDetails = ({movie}) => {
 
   const [increment, setIncrement] = useState(4); // for increment number of actors showing
   
-
-
   // for hide and show background image 
   const backgroundRef = useRef(null);
   const backImage = useRef(null);
@@ -49,45 +53,136 @@ const MovieDetails = ({movie}) => {
     fetchData();
   }, []);
 
-  const handleShowMoreActors = () => {
-    setDisplayedActors(displayedActors + increment);
-    let numberActors = displayedActors + 4
-    console.log("number is -=-=-=- : "+ displayedActors);
+  // const handleShowMoreActors = () => {
+  //   setDisplayedActors(displayedActors + increment);
+  //   let numberActors = displayedActors + 4
+  //   console.log("number is -=-=-=- : "+ displayedActors);
 
-    const divBackground = divBackgroundRef.current;
+  //   const divBackground = divBackgroundRef.current;
 
-    if (numberActors == 8) {
-        divBackground.style.backgroundImage = `linear-gradient(to top, #000000 59%, rgb(0, 0, 0) 70%, rgba(0, 0, 0, 0.816) 73%, rgba(0, 0, 0, 0.601) 75%, rgba(0, 0, 0, 0.599) 80%,  rgba(0, 0, 0, 0.258)100% )`;
-    }else if(numberActors == 12){
-      divBackground.style.backgroundImage = `linear-gradient(to top, #000000 59%, rgb(0, 0, 0) 70%, rgba(0, 0, 0, 0.952) 73%, rgba(0, 0, 0, 0.601) 75%, rgba(0, 0, 0, 0.599) 80%,  rgba(0, 0, 0, 0.258)100%)`;
-    }else if(numberActors == 16){
-      divBackground.style.backgroundImage = `linear-gradient(to top, #000000 59%, rgb(0, 0, 0) 70%, rgb(0, 0, 0) 73%, rgba(0, 0, 0, 0.892) 75%, rgba(0, 0, 0, 0.599) 80%, rgba(0, 0, 0, 0.258)100%)`;
-    }else if(numberActors == 20){
-      divBackground.style.backgroundImage = `linear-gradient(to top, #000000 59%, rgb(0, 0, 0) 70%, rgb(0, 0, 0) 73%, rgb(0, 0, 0) 75%, rgba(0, 0, 0, 0.89) 80%, rgba(0, 0, 0, 0.258)100% )`;
-    }
-  };
-  const handleShowLessActors = () => {
-    setDisplayedActors(displayedActors - increment);
+  //   if (numberActors == 8) {
+  //       divBackground.style.backgroundImage = `linear-gradient(to top, #000000 59%, rgb(0, 0, 0) 70%, rgba(0, 0, 0, 0.816) 73%, rgba(0, 0, 0, 0.601) 75%, rgba(0, 0, 0, 0.599) 80%,  rgba(0, 0, 0, 0.258)100% )`;
+  //   }else if(numberActors == 12){
+  //     divBackground.style.backgroundImage = `linear-gradient(to top, #000000 59%, rgb(0, 0, 0) 70%, rgba(0, 0, 0, 0.952) 73%, rgba(0, 0, 0, 0.601) 75%, rgba(0, 0, 0, 0.599) 80%,  rgba(0, 0, 0, 0.258)100%)`;
+  //   }else if(numberActors == 16){
+  //     divBackground.style.backgroundImage = `linear-gradient(to top, #000000 59%, rgb(0, 0, 0) 70%, rgb(0, 0, 0) 73%, rgba(0, 0, 0, 0.892) 75%, rgba(0, 0, 0, 0.599) 80%, rgba(0, 0, 0, 0.258)100%)`;
+  //   }else if(numberActors == 20){
+  //     divBackground.style.backgroundImage = `linear-gradient(to top, #000000 59%, rgb(0, 0, 0) 70%, rgb(0, 0, 0) 73%, rgb(0, 0, 0) 75%, rgba(0, 0, 0, 0.89) 80%, rgba(0, 0, 0, 0.258)100% )`;
+  //   }
+  // };
+  // const handleShowLessActors = () => {
+  //   setDisplayedActors(displayedActors - increment);
 
-    let numberActors = displayedActors - 4
-    const divBackground = divBackgroundRef.current;
+  //   let numberActors = displayedActors - 4
+  //   const divBackground = divBackgroundRef.current;
 
-    if (numberActors == 8) {
-        divBackground.style.backgroundImage = `linear-gradient(to top, #000000 59%, rgb(0, 0, 0) 70%, rgba(0, 0, 0, 0.816) 73%, rgba(0, 0, 0, 0.601) 75%, rgba(0, 0, 0, 0.599) 80%, rgba(0, 0, 0, 0.258)100% )`;
-    }else if(numberActors == 12){
-      divBackground.style.backgroundImage = `linear-gradient(to top, #000000 59%, rgb(0, 0, 0) 70%, rgba(0, 0, 0, 0.952) 73%, rgba(0, 0, 0, 0.601) 75%, rgba(0, 0, 0, 0.599) 80%, rgba(0, 0, 0, 0.258)100% )`;
-    }else if(numberActors == 16){
-      divBackground.style.backgroundImage = `linear-gradient(to top, #000000 59%, rgb(0, 0, 0) 70%, rgb(0, 0, 0) 73%, rgba(0, 0, 0, 0.892) 75%, rgba(0, 0, 0, 0.599) 80%, rgba(0, 0, 0, 0.258)100% )`;
-    }else if(numberActors == 20){
-      divBackground.style.backgroundImage = `linear-gradient(to top, #000000 59%, rgb(0, 0, 0) 70%, rgb(0, 0, 0) 73%, rgb(0, 0, 0) 75%, rgba(0, 0, 0, 0.89) 80%, rgba(0, 0, 0, 0.258)100% )`;
-    }
+  //   if (numberActors == 8) {
+  //       divBackground.style.backgroundImage = `linear-gradient(to top, #000000 59%, rgb(0, 0, 0) 70%, rgba(0, 0, 0, 0.816) 73%, rgba(0, 0, 0, 0.601) 75%, rgba(0, 0, 0, 0.599) 80%, rgba(0, 0, 0, 0.258)100% )`;
+  //   }else if(numberActors == 12){
+  //     divBackground.style.backgroundImage = `linear-gradient(to top, #000000 59%, rgb(0, 0, 0) 70%, rgba(0, 0, 0, 0.952) 73%, rgba(0, 0, 0, 0.601) 75%, rgba(0, 0, 0, 0.599) 80%, rgba(0, 0, 0, 0.258)100% )`;
+  //   }else if(numberActors == 16){
+  //     divBackground.style.backgroundImage = `linear-gradient(to top, #000000 59%, rgb(0, 0, 0) 70%, rgb(0, 0, 0) 73%, rgba(0, 0, 0, 0.892) 75%, rgba(0, 0, 0, 0.599) 80%, rgba(0, 0, 0, 0.258)100% )`;
+  //   }else if(numberActors == 20){
+  //     divBackground.style.backgroundImage = `linear-gradient(to top, #000000 59%, rgb(0, 0, 0) 70%, rgb(0, 0, 0) 73%, rgb(0, 0, 0) 75%, rgba(0, 0, 0, 0.89) 80%, rgba(0, 0, 0, 0.258)100% )`;
+  //   }
     
-  };
+  // };
 
-  const handleRating = (rate) => {
+  // const handleRating = async (rate) => {
+  //   // const confirmRating = window.confirm(`Are you sure you want to give this movie a rating of ${rate} stars?`);
+  //   const confirmRating = false
+  
+    
+  //   if (confirmRating) {
+  //     setRating(rate);
+  //     console.log(rate);
+  
+  //     // Get the user ID from local storage
+  //     const userId = localStorage.getItem('userId');
+  //     if (!userId) {
+  //       console.error('User ID not found in local storage');
+  //       return;
+  //     }
+  
+  //     // Prepare the data to send
+  //     const ratingData = {
+  //       userId: parseInt(userId, 10),  // Ensure userId is a number
+  //       movieId: movie.id,
+  //       rating: rate
+  //     };
+  
+  //     try {
+  //       // Send the rating data to the API
+  //       const response = await axios.post('http://localhost:5000/add-rating', ratingData);
+  //       console.log('Rating response:', response.data);
+  //     } catch (error) {
+  //       console.error('Error sending rating data:', error);
+  //     }
+  //   }
+  // };
+
+
+
+const handleRating = async (rate) => {
+  const swalWithBootstrapButtons = Swal.mixin({
+    customClass: {
+      popup: 'custom-swal-popup',
+      confirmButton: "btn btn-success",
+      cancelButton: "btn btn-danger"
+    },
+    buttonsStyling: false
+  });
+
+  const result = await swalWithBootstrapButtons.fire({
+    title: "Are you sure?",
+    text: `Do you want to rate this movie ${rate} stars?`,
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonText: "Yes, rate it!",
+    cancelButtonText: "No, cancel!",
+    reverseButtons: true
+  });
+
+  if (result.isConfirmed) {
     setRating(rate);
     console.log(rate);
-  };
+
+    // Get the user ID from local storage
+    const userId = localStorage.getItem('userId');
+    if (!userId) {
+      console.error('User ID not found in local storage');
+      return;
+    }
+
+    // Prepare the data to send
+    const ratingData = {
+      userId: parseInt(userId, 10),  // Ensure userId is a number
+      movieId: movie.id,
+      rating: rate
+    };
+
+    try {
+      // Send the rating data to the API
+      const response = await axios.post('http://localhost:5000/add-rating', ratingData);
+      console.log('Rating response:', response.data);
+    } catch (error) {
+      console.error('Error sending rating data:', error);
+    }
+
+    swalWithBootstrapButtons.fire(
+      'Rated!',
+      'Your rating has been recorded.',
+      'success'
+    );
+  } else if (result.dismiss === Swal.DismissReason.cancel) {
+    swalWithBootstrapButtons.fire(
+      'Cancelled',
+      'Your rating was not recorded.',
+      'error'
+    );
+  }
+};
+
 
   const handleBackgroundVisibility = () => {
     const backgroundDiv = backgroundRef.current;
@@ -156,6 +251,7 @@ const MovieDetails = ({movie}) => {
                 </h3>
               </div>
               <div className="rating">
+
                 {[...Array(5)].map((_, index) => {
                   const ratingValue = (index + 1) ;
                   return (
@@ -171,7 +267,19 @@ const MovieDetails = ({movie}) => {
                     />
                   );
                 })}
-                <small><span style={{'color' : '#cdc9c9'}}>(</span> {movie.ratings_mean.toFixed(2)} <span style={{'color' : '#cdc9c9'}}>/</span> {movie.vote_count} <span style={{'color' : '#cdc9c9'}}>)</span></small>
+                
+                {/* <small><span style={{'color' : '#cdc9c9'}}>(</span> {movie.ratings_mean} <span style={{'color' : '#cdc9c9'}}>/</span> {movie.vote_count} <span style={{'color' : '#cdc9c9'}}>)</span></small> */}
+                <small><span style={{'color' : '#cdc9c9'}}>( </span> 
+                {/* {movie.ratings_mean.toFixed(2)}  */}
+                {movie.ratings_mean !== undefined && movie.ratings_mean !== null 
+                ? movie.ratings_mean.toFixed(2) 
+                : movie.average_rating !== undefined && movie.average_rating !== null 
+                  ? movie.average_rating.toFixed(2) 
+                  : 'N/A'}
+                    
+                    <FontAwesomeIcon icon={farStarr} className="star" color="#ffc107" style={{ marginLeft: '3px' }} />
+                    {/* <FontAwesomeIcon icon={fasStar} className="star" color="#ffc107" style={{ marginLeft: '5px' }} /> */}
+                <span style={{'color' : '#cdc9c9'}}> / </span> {movie.vote_count} <span style={{'color' : '#cdc9c9'}}>)</span></small>
               </div>
             </div>
           </div>

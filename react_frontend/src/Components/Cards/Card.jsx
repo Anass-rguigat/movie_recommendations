@@ -3,6 +3,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar, faStarHalfAlt, faStar as farStar } from '@fortawesome/free-solid-svg-icons';
 import { getHybridRecommendations } from '../../api/hybrid';
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+
 
 const Card = ({heroData}) => {
     const [movies, setMovies] = useState([]);
@@ -14,6 +16,7 @@ const Card = ({heroData}) => {
             try {
                 const data = await getHybridRecommendations();
                 setMovies(data);
+                console.log(data);
             } catch (error) {
                 console.error('Error fetching recommendations:', error);
             }
@@ -22,6 +25,8 @@ const Card = ({heroData}) => {
         fetchRecommendations();
 
     }, [userId]);
+
+    const navigate = useNavigate();
 
     const renderStars = (rating) => {
         const totalStars = 5;
@@ -36,6 +41,10 @@ const Card = ({heroData}) => {
             }
         }
         return stars;
+    };
+
+    const handleDetailsClick = (movie) => {
+        navigate('/detail', { state: { movie } });
     };
 
     return (
@@ -59,7 +68,7 @@ const Card = ({heroData}) => {
                                     )}
                                 </h1>
                                 <div className="info">
-                                    <p> {renderStars(movie.vote_average)} | {movie.release_date}</p>
+                                    <p> {renderStars(movie.average_rating)} {movie.average_rating.toFixed(2)} | {movie.release_date}</p>
                                 </div>
                                 <p className="short-desc">
                                     {movie.overview.length > maxLengthDesc ? (
@@ -71,7 +80,7 @@ const Card = ({heroData}) => {
                                     )}
                                 </p>
                                 <div className="icons">
-                                    <button className="btn">SEE MORE</button>
+                                    <button className="btn" onClick={() => handleDetailsClick(movie)}>SEE MORE</button>
                                 </div>
                             </div>
                         </div>

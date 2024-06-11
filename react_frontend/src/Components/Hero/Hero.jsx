@@ -4,12 +4,15 @@ import { faStar, faStarHalfAlt, faStar as farStar } from '@fortawesome/free-soli
 import play_icon from '../../assets/play_icon.png';
 import pause_icon from '../../assets/pause_icon.png';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const Hero = ({ heroData, setPlayStatus, playStatus }) => {
     const [isHeroContentVisible, setIsHeroContentVisible] = useState(true);
     const maxLengthDesc = 250
     const maxLength =20
-    console.log(heroData);
+
+    const navigate = useNavigate();
+    // console.log(heroData);
 
     const renderStars = (rating) => {
         const totalStars = 5;
@@ -30,6 +33,10 @@ const Hero = ({ heroData, setPlayStatus, playStatus }) => {
     const handlePlayClick = () => {
         setPlayStatus(!playStatus);
         setIsHeroContentVisible(!isHeroContentVisible);
+    };
+
+    const handleDetailsClick = (movie) => {
+        navigate('/detail', { state: { movie } });
     };
 
     return (
@@ -56,16 +63,17 @@ const Hero = ({ heroData, setPlayStatus, playStatus }) => {
                     </p>
                     <p className='genre'>{heroData.genres.map(genre => genre.name).join(" - ")}</p>
                     <div className='rating'>
-                        {renderStars(heroData.average_rating)}
+                        {renderStars(heroData.average_rating) } <span style={{ marginTop : "-4px" , marginLeft : "4px"}}>{heroData.average_rating.toFixed(2)}</span>
                         {/* {renderStars(heroData.vote_average)} */}
                     </div>
+                    <button className="btn" onClick={() => handleDetailsClick(heroData)}>SEE MORE</button>
                 </div>
             )}
-            <button className="btn">SEE MORE</button>
             <div className="hero-dot-play">
                 <ul className="hero-dots"></ul>
                 <div className="hero-play">
                     <img onClick={handlePlayClick} src={playStatus ? pause_icon : play_icon} alt="" />
+                    {/* <img onClick={() => setPlayStatus(!playStatus) } src={playStatus ? pause_icon : play_icon} alt="" /> */}
                     {/* <img onClick={() => setPlayStatus(!playStatus) } src={playStatus ? pause_icon : play_icon} alt="" /> */}
                     <p>See the trailer</p>
                 </div>

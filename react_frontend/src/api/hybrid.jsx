@@ -13,8 +13,16 @@ const tmdbApi = axios.create({
 
 export const getHybridRecommendations = async () => {
   try {
+
+    // Get the user ID from local storage
+    const userId = localStorage.getItem('userId');
+    if (!userId) {
+      throw new Error('User ID not found in local storage');
+    }
+    console.log(userId);
+
     // Use a POST request and send user_id in the body with value 1 or any value of id not important
-    const response = await flaskApi.post('/recommendations-hybrid', { user_id: 2 });
+    const response = await flaskApi.post('/recommendations-hybrid', { user_id: userId });
     const recommendations = response.data;
     // console.log(recommendations);
 

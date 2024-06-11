@@ -16,7 +16,12 @@ export const getUser = async () => {
           Authorization: `Bearer ${localStorage.getItem('token')}`, 
         },
       });
-      return response.data;
+
+      const userData = response.data;
+      // console.log(userData.user.id);
+      localStorage.setItem('userId', userData.user.id); // Store user ID in local storage
+      return userData;
+
     } catch (error) {
       throw new Error('Failed to fetch user data: ' + error.message);
     }

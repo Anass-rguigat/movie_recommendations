@@ -1,4 +1,4 @@
-.loader-container {
+/* .loader-container {
     position: relative;
     width: 100%;
     height: 100 bvh; 
@@ -6,8 +6,20 @@
     display: flex;
     justify-content: center;
     align-items: center;
-  }
+    background-color: #0e0d12;
+  } */
 
+  .loader-container {
+    position: relative;
+    width: 100%;
+    height: 100vh; /* Corrected from '100 bvh' to '100vh' */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* background-color: #0e0d12;  */
+    background-image: linear-gradient(216deg, rgba(11,12,11, 0.05) 0%, rgba(11,12,11, 0.05) 25%,rgba(79,78,78, 0.05) 25%, rgba(79,78,78, 0.05) 38%,rgba(94,85,85, 0.05) 38%, rgba(94,85,85, 0.05) 75%,rgba(40,39,39, 0.05) 75%, rgba(40,39,39, 0.05) 100%),linear-gradient(44deg, rgba(45,83,27, 0.05) 0%, rgba(45,83,27, 0.05) 34%,rgba(40,39,39, 0.05) 34%, rgba(40,39,39, 0.05) 57%,rgba(94,85,85, 0.05) 57%, rgba(94,85,85, 0.05) 89%,rgba(37,38,37, 0.05) 89%, rgba(37,38,37, 0.05) 100%),linear-gradient(241deg, rgba(0,0,0, 0.05) 0%, rgba(0,0,0, 0.05) 14%,rgba(40,39,39, 0.05) 14%, rgba(40,39,39, 0.05) 60%,rgba(40,39,39, 0.05) 60%, rgba(40,39,39, 0.05) 69%,rgba(40,39,39, 0.05) 69%, rgba(40,39,39, 0.05) 100%),linear-gradient(249deg, rgba(40,39,39, 0.05) 0%, rgba(40,39,39, 0.05) 32%,rgba(0,0,0, 0.05) 32%, rgba(0,0,0, 0.05) 35%,rgba(0,0,0, 0.05) 35%, rgba(0,0,0, 0.05) 51%,rgba(0,0,0, 0.05) 51%, rgba(0,0,0, 0.05) 100%),linear-gradient(92deg, rgb(32,32,32),rgb(32,32,32));
+
+}
   
    @keyframes square-animation {
     0% {

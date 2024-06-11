@@ -11,7 +11,7 @@ class HybridRecommender:
     def get_model_name(self):
         return self.MODEL_NAME
     
-    def recommend_items(self, user_id, items_to_ignore=[], topn=10):
+    def recommend_items(self, user_id, items_to_ignore=[], topn=30):
         cf_recommendations = self.cf_model.recommend_items(user_id, items_to_ignore=items_to_ignore, topn=topn)
         cb_recommendations = self.cb_model.recommend_items(user_id, items_to_ignore=items_to_ignore, topn=topn)
         hybrid_recommendations = pd.concat([cf_recommendations, cb_recommendations]).drop_duplicates().reset_index(drop=True)

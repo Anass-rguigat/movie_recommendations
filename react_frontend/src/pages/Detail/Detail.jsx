@@ -16,24 +16,24 @@ const Detail = () => {
   // console.log(movie);
   
   const navigate = useNavigate();
-  // useEffect(() => {
-  //   const fetchUser = async () => {
-  //     try {
-  //       const response = await getUser();
-  //       setUser(response.user);
-  //     } catch (error) {
-  //       setError('Failed to fetch user data: ' + error.message);
-  //       navigate('/login')
-  //     }
-  //   };
+  useEffect(() => {
+    const fetchUser = async () => {
+      try {
+        const response = await getUser();
+        setUser(response.user);
+      } catch (error) {
+        setError('Failed to fetch user data: ' + error.message);
+        navigate('/login')
+      }
+    };
 
-  //   fetchUser();
-  // }, []);
+    fetchUser();
+  }, []);
   return (
     <div>
-      {/* {error ? (
+      {error ? (
         <p>Error: {error}</p>
-      ) : user ? ( */}
+      ) : user ? (
       <header className="header-top">
             <Navbar />
             <div>
@@ -41,9 +41,9 @@ const Detail = () => {
             </div>
               <Footer />
         </header>
-        {/* // ) : (
-        //   <Loading />
-        // )} */}
+        ) : (
+          <Loading />
+        )} 
     </div>
   )
 }
