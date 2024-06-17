@@ -95,6 +95,23 @@ cf_recommender_model = create_cf_model(ratings)
 # Hybrid filtering
 hybrid_model = HybridRecommender(cf_model=cf_recommender_model, cb_model=content_based_recommender_model, expended_movies_df=expended_movies_df)
 
+#check if rating movie or not 
+def select_random_movies(num_movies):
+    movies_sample = movies.sample(n=num_movies)
+    return movies_sample.to_dict(orient='records')
+def check_user_ratings(user_id):
+    # Check if the user has any ratings
+    user_ratings = ratings[ratings['userId'] == user_id]
+
+    if not user_ratings.empty:
+        return {'has_rated': True, 'message': 'User has already rated movies.'}
+    else:
+        # Select 6 random movies
+        random_movies = select_random_movies(6)
+        return {'has_rated': False, 'random_movies': random_movies}
+    
+
+
 @app.route('/recommendations-popularity', methods=['POST'])
 def recommendation_popularity():
     try:
@@ -166,6 +183,19 @@ def recommendation_hybrid():
     except Exception as e:
         logging.error(f"Error in recommendation_hybrid: {e}")
         return jsonify({'error': 'Internal Server Error'}), 500
+@app.route('/check-user-ratings', methods=['POST'])
+def check_user_ratings_endpoint():
+    try:
+        data = request.json
+        user_id = int(data['user_id'])
+
+        result = check_user_ratings(user_id)
+        
+        return jsonify(result), 200
+
+    except Exception as e:
+        logging.error(f"Failed to check user ratings: {e}")
+        return jsonify({'error': 'Failed to check user ratings.'}), 500
 
 @app.route('/recommendations-hybrid_search', methods=['POST'])
 def recommendation_hybrid_search():

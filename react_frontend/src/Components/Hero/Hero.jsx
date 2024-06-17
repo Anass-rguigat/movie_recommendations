@@ -8,11 +8,10 @@ import { useNavigate } from 'react-router-dom';
 
 const Hero = ({ heroData, setPlayStatus, playStatus }) => {
     const [isHeroContentVisible, setIsHeroContentVisible] = useState(true);
-    const maxLengthDesc = 250
-    const maxLength =20
+    const maxLengthDesc = 250;
+    const maxLength = 20;
 
     const navigate = useNavigate();
-    // console.log(heroData);
 
     const renderStars = (rating) => {
         const totalStars = 5;
@@ -39,32 +38,51 @@ const Hero = ({ heroData, setPlayStatus, playStatus }) => {
         navigate('/detail', { state: { movie } });
     };
 
+    const renderGenres = (genres) => {
+        const maxGenresToShow = 5;
+    
+        if (genres.length > maxGenresToShow) {
+            return genres.slice(0, maxGenresToShow).map((genre, index) => (
+                <span key={index}>
+                    {genre.name}
+                    {index !== maxGenresToShow - 1 && ' - '} {/* Add "-" only if it's not the last genre */}
+                </span>
+            )).concat(<span key="ellipsis">...</span>);
+        } else {
+            return genres.map((genre, index) => (
+                <span key={index}>
+                    {genre.name}
+                    {index !== genres.length - 1 && ' - '} {/* Add "-" only if it's not the last genre */}
+                </span>
+            ));
+        }
+    };
+
     return (
         <div className={`hero ${isHeroContentVisible ? '' : 'hidden-content'}`}>
             {heroData && heroData.title && (
                 <div className="hero-text">
                     <p className='title'>
-                    {heroData.title.length > maxLength ? (
-                  <>
-                    {heroData.title.substring(0, maxLength)}<span className="pointsTitle">...</span><span className="full-title">{heroData.title.substring(maxLength)}</span>
-                  </>
-                ) : (
-                  heroData.title
-                )}
+                        {heroData.title.length > maxLength ? (
+                            <>
+                                {heroData.title.substring(0, maxLength)}<span className="pointsTitle">...</span><span className="full-title">{heroData.title.substring(maxLength)}</span>
+                            </>
+                        ) : (
+                            heroData.title
+                        )}
                     </p>
                     <p className='description'>
-                    {heroData.overview.length > maxLengthDesc ? (
-                                        <>
-                                            {heroData.overview.substring(0, maxLengthDesc)}<span className="pointsdesc">...</span>
-                                        </>
-                                    ) : (
-                                      heroData.overview
-                                    )}
+                        {heroData.overview.length > maxLengthDesc ? (
+                            <>
+                                {heroData.overview.substring(0, maxLengthDesc)}<span className="pointsdesc">...</span>
+                            </>
+                        ) : (
+                            heroData.overview
+                        )}
                     </p>
-                    <p className='genre'>{heroData.genres.map(genre => genre.name).join(" - ")}</p>
+                    <p className='genre'>{renderGenres(heroData.genres)}</p>
                     <div className='rating'>
-                        {renderStars(heroData.average_rating) } <span style={{ marginTop : "-4px" , marginLeft : "4px"}}>{heroData.average_rating.toFixed(2)}</span>
-                        {/* {renderStars(heroData.vote_average)} */}
+                        {renderStars(heroData.average_rating)} <span style={{ marginTop: "-4px", marginLeft: "4px" }}>{heroData.average_rating.toFixed(2)}</span>
                     </div>
                     <button className="btn" onClick={() => handleDetailsClick(heroData)}>SEE MORE</button>
                 </div>
@@ -73,8 +91,6 @@ const Hero = ({ heroData, setPlayStatus, playStatus }) => {
                 <ul className="hero-dots"></ul>
                 <div className="hero-play">
                     <img onClick={handlePlayClick} src={playStatus ? pause_icon : play_icon} alt="" />
-                    {/* <img onClick={() => setPlayStatus(!playStatus) } src={playStatus ? pause_icon : play_icon} alt="" /> */}
-                    {/* <img onClick={() => setPlayStatus(!playStatus) } src={playStatus ? pause_icon : play_icon} alt="" /> */}
                     <p>See the trailer</p>
                 </div>
             </div>
