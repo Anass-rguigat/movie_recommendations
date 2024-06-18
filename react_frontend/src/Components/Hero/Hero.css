@@ -146,12 +146,25 @@
 .hero-play {
     display: flex;
     align-items: center;
-    gap: 30px;
+    gap: 20px;
+    
+}
+.hero-play .icon-play-thriller{ 
+    transition: .3s;
+    cursor: pointer;
+    
+}
+.hero-play .icon-play-thriller:hover{ 
+    opacity: 0.7;
+    filter: drop-shadow(2px 4px #000000);
 }
 
 .hero-play p {
     color: #fff;
-    font-size: 1em; /* Use relative units */
+    font-size: 1.2em; /* Use relative units */
+    font-weight: bold;
+    font-family:'Gill Sans';
+    
 }
 
 /* Responsive styles */

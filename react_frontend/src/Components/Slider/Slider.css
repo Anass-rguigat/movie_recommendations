@@ -408,3 +408,27 @@
         top: 30%;
     }
 }
+
+
+
+
+/* ---------- custom scrollbar ---------- */
+.thumbnail::-webkit-scrollbar{
+    width: 10px;
+    height: 10px;
+}
+
+.thumbnail::-webkit-scrollbar-track{
+    /* background-color: rgb(3, 87, 87); */
+    background: -webkit-linear-gradient(to top, #474949, #44A08D);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to top, #798585, #348d7b); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background: transparent !important;  /* fallback for old browsers */
+}
+
+.thumbnail::-webkit-scrollbar-thumb{
+    background: -webkit-linear-gradient(to bottom, #57575a, #43C6AC);  
+    background: linear-gradient(to bottom, #707074, #186858); 
+    background: #3f3f3f;  
+    
+    border-radius: 10px;
+}

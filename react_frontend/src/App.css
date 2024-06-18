@@ -1,3 +1,25 @@
 .App{
     position:relative;
 }
+
+/* ---------- custom scrollbar ---------- */
+::-webkit-scrollbar{
+    width: 10px;
+}
+
+::-webkit-scrollbar-track{
+    /* background-color: rgb(3, 87, 87); */
+    background: #44A08D;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to top,#515151 , #181818 );  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to top,#2d2d2d, #515151  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+}
+
+::-webkit-scrollbar-thumb{
+    background: -webkit-linear-gradient(to bottom, #191654, #43C6AC);  
+    background: #191a1a;  /* fallback for old browsers */
+    background: linear-gradient(to bottom, #2c2c2c, #151515); 
+    
+    border-radius: 10px;
+    box-shadow: 2px 1px 10px rgb(0, 0, 0);
+}

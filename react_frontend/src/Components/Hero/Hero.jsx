@@ -63,7 +63,7 @@ const Hero = ({ heroData, setPlayStatus, playStatus }) => {
                     </p>
                     <p className='genre'>{heroData.genres.map(genre => genre.name).join(" - ")}</p>
                     <div className='rating'>
-                        {renderStars(heroData.average_rating) } <span style={{ marginTop : "-4px" , marginLeft : "4px"}}>{heroData.average_rating.toFixed(2)}</span>
+                        {renderStars(heroData.average_rating) } <span style={{ marginTop : "-4px" , marginLeft : "4px", fontFamily : "Gill Sans", fontWeight : "bold"}}>{heroData.average_rating.toFixed(2)}</span>
                         {/* {renderStars(heroData.vote_average)} */}
                     </div>
                     <button className="btn" onClick={() => handleDetailsClick(heroData)}>SEE MORE</button>
@@ -72,10 +72,10 @@ const Hero = ({ heroData, setPlayStatus, playStatus }) => {
             <div className="hero-dot-play">
                 <ul className="hero-dots"></ul>
                 <div className="hero-play">
-                    <img onClick={handlePlayClick} src={playStatus ? pause_icon : play_icon} alt="" />
+                    <img onClick={handlePlayClick} src={playStatus ? pause_icon : play_icon} alt="" className='icon-play-thriller' />
                     {/* <img onClick={() => setPlayStatus(!playStatus) } src={playStatus ? pause_icon : play_icon} alt="" /> */}
                     {/* <img onClick={() => setPlayStatus(!playStatus) } src={playStatus ? pause_icon : play_icon} alt="" /> */}
-                    <p>See the trailer</p>
+                    <p>See the thriller</p>
                 </div>
             </div>
         </div>
