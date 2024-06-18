@@ -82,7 +82,24 @@ const Hero = ({ heroData, setPlayStatus, playStatus }) => {
                     </p>
                     <p className='genre'>{renderGenres(heroData.genres)}</p>
                     <div className='rating'>
-                        {renderStars(heroData.average_rating)} <span style={{ marginTop: "-4px", marginLeft: "4px" }}>{heroData.average_rating.toFixed(2)}</span>
+
+                        {renderStars(
+                            heroData.average_rating !== undefined && heroData.average_rating !== null 
+                            ? heroData.average_rating.toFixed(2) 
+                            : heroData.ratings_mean !== undefined && heroData.ratings_mean !== null 
+                              ? heroData.ratings_mean.toFixed(2) 
+                              : 'N/A'
+                        )}
+                        <span style={{ marginTop: "-4px", marginLeft: "4px" }}>
+                            {/* heroData.average_rating.toFixed(2) */}
+                            {heroData.average_rating !== undefined && heroData.average_rating !== null 
+                                ? heroData.average_rating.toFixed(2) 
+                                : heroData.ratings_mean !== undefined && heroData.ratings_mean !== null 
+                                  ? heroData.ratings_mean.toFixed(2) 
+                                  : 'N/A'
+                            }
+
+                        </span>
                     </div>
                     <button className="btn" onClick={() => handleDetailsClick(heroData)}>SEE MORE</button>
                 </div>

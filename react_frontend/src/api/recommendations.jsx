@@ -19,12 +19,12 @@ export const getPopularityRecommendations = async () => {
     if (!userId) {
       throw new Error('User ID not found in local storage');
     }
-    console.log(userId);
+    // console.log(userId);
     
     // Use a POST request and send user_id in the body 
     const response = await flaskApi.post('/recommendations-popularity', { user_id: userId });
     const recommendations = response.data;
-    // console.log(recommendations);
+    console.log(recommendations);
 
     // Fetch detailed movie info from TMDB for each recommended movie
     const detailedRecommendations = await Promise.all(

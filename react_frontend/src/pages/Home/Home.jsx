@@ -6,6 +6,7 @@ import Card from "../../Components/Cards/Card";
 import Footer from "../../Components/Footer/Footer";
 import { getUser } from '../../api/auth';
 import { getHybridRecommendations } from '../../api/hybrid';
+import { getPopularityRecommendations } from '../../api/recommendations';
 import { useNavigate } from "react-router-dom";
 import Loading from "../../Components/loadingAnimation/Loading";
 import axios from "axios";
@@ -20,7 +21,7 @@ const Home = () => {
   const [playStatus, setPlayStatus] = useState(false);
   const [hasRated, setHasRated] = useState(false);
   const [movieALT, setMovieALT] = useState([]);
-  const [countRating, setCountRating] = useState(0)
+  const [countRating, setCountRating] = useState(0);
   useEffect(() => {
     const fetchUser = async () => {
       try {
@@ -45,7 +46,14 @@ const Home = () => {
 
           if (!response.data.has_rated) {
             setHasRated(false);
-            setMovieALT(response.data.random_movies);
+            // setMovieALT(response.data.random_movies);
+            const data = await getPopularityRecommendations();
+            const top100Movies = data;
+            const shuffledMovies = top100Movies.sort(() => 0.5 - Math.random());
+            const random30Movies = shuffledMovies.slice(0, 30);
+            setHeroData(random30Movies);
+            console.log(random30Movies);
+
           } else {
             setHasRated(true);
             const data = await getHybridRecommendations();
@@ -75,11 +83,11 @@ const Home = () => {
         <p>Error: {error}</p>
       ) : user ? (
         <div className="home">
-          {!hasRated || countRating < 6 ? (
+          {/* {!hasRated  ? (
             <div className="rating-reminder">
-            <MovieRating movies={movieALT} setCountRating={setCountRating} /> {/* Pass movie and handleNext */}
+            <MovieRating movies={movieALT} setCountRating={setCountRating} /> {/* Pass movie and handleNext 
           </div>
-          ) : (
+          ) : ( */}
             <>
             <header className="header-home">
             <Background heroData={heroData[0]} playStatus={playStatus} heroCount={heroCount} />
@@ -95,7 +103,7 @@ const Home = () => {
               <Card heroData={heroData.slice(1)} />
               <Footer />
             </>
-          )}
+          {/* )} */}
         </div>
       ) : (
         <Loading />

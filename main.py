@@ -183,6 +183,7 @@ def recommendation_hybrid():
     except Exception as e:
         logging.error(f"Error in recommendation_hybrid: {e}")
         return jsonify({'error': 'Internal Server Error'}), 500
+        
 @app.route('/check-user-ratings', methods=['POST'])
 def check_user_ratings_endpoint():
     try:

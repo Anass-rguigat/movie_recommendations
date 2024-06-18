@@ -19,12 +19,10 @@ export const getHybridRecommendations = async () => {
     if (!userId) {
       throw new Error('User ID not found in local storage');
     }
-    console.log(userId);
 
     // Use a POST request and send user_id in the body with value 1 or any value of id not important
     const response = await flaskApi.post('/recommendations-hybrid', { user_id: userId });
     const recommendations = response.data;
-    // console.log(recommendations);
 
     // Fetch detailed movie info from TMDB for each recommended movie
     const detailedRecommendations = await Promise.all(

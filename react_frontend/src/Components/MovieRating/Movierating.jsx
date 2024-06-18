@@ -9,7 +9,9 @@ const MovieRating = ({ movies , setCountRating }) => {
     const [ratings, setRatings] = useState({});
     const [hoverRating, setHoverRating] = useState(0);
     const [currentMovieIndex, setCurrentMovieIndex] = useState(0);
-    const [count ,setCount] = useState(0)
+    const [count ,setCount] = useState(0);
+
+
     const handleRatingChange = async (movieId, ratingValue) => {
         const swalWithBootstrapButtons = Swal.mixin({
             customClass: {
@@ -51,6 +53,9 @@ const MovieRating = ({ movies , setCountRating }) => {
                 console.error('User ID not found in local storage');
                 return;
             }
+            console.log("user id : " + userId);
+            console.log("movie id : "+ movieId);
+            console.log("rating : " + ratingValue);
 
             const ratingData = {
                 userId: parseInt(userId, 10),
@@ -59,7 +64,9 @@ const MovieRating = ({ movies , setCountRating }) => {
             };
             try {
                 const response = await axios.post('http://localhost:5000/add-rating', ratingData);
+
                 console.log('Rating response:', response.data);
+
                 if(response.data == 200){
                     setCount(count+1)
                     setCountRating(count);
@@ -105,7 +112,7 @@ const MovieRating = ({ movies , setCountRating }) => {
                                             key={index}
                                             icon={ratingValue <= (ratings[movie.id] || hoverRating) ? fasStar : farStar}
                                             className="star"
-                                            onClick={() => handleRatingChange(movie.id, ratingValue)}
+                                            onClick={() => handleRatingChange(movie.movieId, ratingValue)}
                                             onMouseEnter={() => setHoverRating(ratingValue)}
                                             onMouseLeave={() => setHoverRating(ratings[movie.id])}
                                             color={ratingValue <= (ratings[movie.id] || hoverRating) ? '#ffc107' : 'rgb(171, 165, 165)'}

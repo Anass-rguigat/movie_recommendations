@@ -16,7 +16,7 @@ const Card = ({heroData}) => {
             try {
                 const data = await getHybridRecommendations();
                 setMovies(data);
-                console.log(data);
+                // console.log(data);
             } catch (error) {
                 console.error('Error fetching recommendations:', error);
             }
@@ -68,7 +68,20 @@ const Card = ({heroData}) => {
                                     )}
                                 </h1>
                                 <div className="info">
-                                    <p> {renderStars(movie.average_rating)} {movie.average_rating.toFixed(2)} | {movie.release_date}</p>
+                                    <p> {renderStars(
+                                            movie.ratings_mean !== undefined && movie.ratings_mean !== null 
+                                            ? movie.ratings_mean.toFixed(2) 
+                                            : movie.average_rating !== undefined && movie.average_rating !== null 
+                                              ? movie.average_rating.toFixed(2) 
+                                              : 'N/A'
+                                        )} { 
+                                                movie.ratings_mean !== undefined && movie.ratings_mean !== null 
+                                                ? movie.ratings_mean.toFixed(2) 
+                                                : movie.average_rating !== undefined && movie.average_rating !== null 
+                                                ? movie.average_rating.toFixed(2) 
+                                                : 'N/A'
+                                            } | {movie.release_date}
+                                    </p>
                                 </div>
                                 <p className="short-desc">
                                     {movie.overview.length > maxLengthDesc ? (
