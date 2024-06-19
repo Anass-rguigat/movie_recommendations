@@ -18,26 +18,52 @@ class AuthController extends Controller
 // -=-=-=-=-=-=-=-=_ LOGIN 1 _=-=-=-=-=-=-=-=-=-=-
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
+    // public function login(Request $request)
+    // {
+    //     $validatedData = $request->validate([
+    //         'email' => 'required|string|email|max:255',
+    //         'password' => 'required|string',
+    //     ]);
+
+    //     if (!Auth::attempt($validatedData)) {
+    //         throw ValidationException::withMessages([
+    //             'credentials' => ['The provided credentials are incorrect.'],
+    //         ]);
+    //     }
+
+
+    //     $token = $request->user()->createToken('auth_token')->plainTextToken;
+
+    //     return response()->json([
+    //         'access_token' => $token,
+    //         'token_type' => 'Bearer',
+    //     ]);
+    // }
+
     public function login(Request $request)
     {
         $validatedData = $request->validate([
             'email' => 'required|string|email|max:255',
             'password' => 'required|string',
         ]);
-
-        if (!Auth::attempt($validatedData)) {
-            throw ValidationException::withMessages([
-                'credentials' => ['The provided credentials are incorrect.'],
-            ]);
+    
+        if (!Auth::attempt($request->only('email', 'password'))) {
+            return response()->json([
+                'errors' => [
+                    'credentials' => ['The provided credentials are incorrect.'],
+                ]
+            ], 422); // Return a 422 Unprocessable Entity status code for validation errors
         }
-
-        $token = $request->user()->createToken('auth_token')->plainTextToken;
-
+    
+        $user = Auth::user();
+        $token = $user->createToken('auth_token')->plainTextToken;
+    
         return response()->json([
             'access_token' => $token,
             'token_type' => 'Bearer',
         ]);
     }
+    
 
 
 
@@ -76,35 +102,65 @@ class AuthController extends Controller
 // -=-=-=-=-=-=-=-=_ REGISTER _-=-=-=-=-=-=-=-=-=-=-
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 
+    // public function register(Request $request)
+    // {
+    //     $input = $request->all();
+
+    //     $validation = Validator::make($input,[
+    //         'name'=> 'required',
+    //         'email' => 'required|email|unique:users',
+    //         'password' => 'required',
+    //     ]);
+
+    //     if($validation->fails()){
+    //         return response()->json(['success' => false, 'error' => $validation->errors()]);
+    //     }
+
+    //     $user = User::create([
+    //         'name'     => $input['name'],
+    //         'email'    => $input['email'],
+    //         'password' => Hash::make($input['password'])
+    //     ]);
+
+    //     $token = $user->createToken('authToken')->plainTextToken;
+
+    //     if($user){
+    //         return response()->json(['success' => true, 'message'=>'registred succefully', 'access_token' => $token, 'user' => $user,]);
+    //     }
+
+    //     return response()->json(['success' => false, 'message'=>'not registred']);
+
+    // }
+
     public function register(Request $request)
-    {
-        $input = $request->all();
+{
+    $input = $request->all();
 
-        $validation = Validator::make($input,[
-            'name'=> 'required',
-            'email' => 'required|email|unique:users',
-            'password' => 'required',
-        ]);
+    $validation = Validator::make($input, [
+        'name' => 'required|string|max:255',
+        'email' => 'required|email|unique:users|max:255',
+        'password' => 'required|string|min:8',
+    ]);
 
-        if($validation->fails()){
-            return response()->json(['success' => false, 'error' => $validation->errors()]);
-        }
-
-        $user = User::create([
-            'name'     => $input['name'],
-            'email'    => $input['email'],
-            'password' => Hash::make($input['password'])
-        ]);
-
-        $token = $user->createToken('authToken')->plainTextToken;
-
-        if($user){
-            return response()->json(['success' => true, 'message'=>'registred succefully', 'access_token' => $token, 'user' => $user,]);
-        }
-
-        return response()->json(['success' => false, 'message'=>'not registred']);
-
+    if ($validation->fails()) {
+        return response()->json(['errors' => $validation->errors()], 422);
     }
+
+    $user = User::create([
+        'name' => $input['name'],
+        'email' => $input['email'],
+        'password' => Hash::make($input['password'])
+    ]);
+
+    $token = $user->createToken('authToken')->plainTextToken;
+
+    return response()->json([
+        'success' => true,
+        'message' => 'Registered successfully',
+        'access_token' => $token,
+        'user' => $user,
+    ]);
+}
 
 
 // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
