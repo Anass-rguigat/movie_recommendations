@@ -145,11 +145,11 @@ const handleRating = async (rate) => {
 
   if (result.isConfirmed) {
     setRating(rate);
-    console.log(rate);
 
     // Get the user ID from local storage
     const userId = localStorage.getItem('userId');
     if (!userId) {
+      console.log(userId)
       console.error('User ID not found in local storage');
       return;
     }

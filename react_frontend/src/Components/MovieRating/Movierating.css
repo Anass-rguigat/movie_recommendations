@@ -1,0 +1,186 @@
+/* Styles for the movie card */
+@keyframes slideOut {
+    from {
+      transform: translateX(0);
+      opacity: 1;
+    }
+    to {
+      transform: translateX(100%);
+      opacity: 0;
+    }
+  }
+  .rating-reminder{
+    height: 100vh;
+    background-image: linear-gradient(216deg, rgba(11,12,11, 0.05) 0%, rgba(11,12,11, 0.05) 25%,rgba(79,78,78, 0.05) 25%, rgba(79,78,78, 0.05) 38%,rgba(94,85,85, 0.05) 38%, rgba(94,85,85, 0.05) 75%,rgba(40,39,39, 0.05) 75%, rgba(40,39,39, 0.05) 100%),linear-gradient(44deg, rgba(45,83,27, 0.05) 0%, rgba(45,83,27, 0.05) 34%,rgba(40,39,39, 0.05) 34%, rgba(40,39,39, 0.05) 57%,rgba(94,85,85, 0.05) 57%, rgba(94,85,85, 0.05) 89%,rgba(37,38,37, 0.05) 89%, rgba(37,38,37, 0.05) 100%),linear-gradient(241deg, rgba(0,0,0, 0.05) 0%, rgba(0,0,0, 0.05) 14%,rgba(40,39,39, 0.05) 14%, rgba(40,39,39, 0.05) 60%,rgba(40,39,39, 0.05) 60%, rgba(40,39,39, 0.05) 69%,rgba(40,39,39, 0.05) 69%, rgba(40,39,39, 0.05) 100%),linear-gradient(249deg, rgba(40,39,39, 0.05) 0%, rgba(40,39,39, 0.05) 32%,rgba(0,0,0, 0.05) 32%, rgba(0,0,0, 0.05) 35%,rgba(0,0,0, 0.05) 35%, rgba(0,0,0, 0.05) 51%,rgba(0,0,0, 0.05) 51%, rgba(0,0,0, 0.05) 100%),linear-gradient(92deg, rgb(32,32,32),rgb(32,32,32));
+  }
+  .rating-card{
+    padding-top: 150px;
+  }
+  .movie_card {
+    position: relative;
+    display: none;
+    width: 900px;
+    height: 400px;
+    margin:  auto;
+    overflow: hidden;
+    border-radius: 10px;
+    transition: all 0.4s;
+    box-shadow: 0px 0px 120px -25px rgba(0, 0, 0, 0.5);
+  }
+  
+  .movie_card.active {
+    display: block;
+    animation: slideIn 0.5s ease-out forwards;
+  }
+  
+  .movie_card.slide-out {
+    animation: slideOut 0.5s ease-out forwards;
+  }
+  
+  .movie_card:hover {
+    transform: scale(1.02);
+    box-shadow: 0px 0px 80px -25px rgba(0, 0, 0, 0.5);
+    transition: all 0.4s;
+  }
+  
+  .movie_card .info_section {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background-blend-mode: multiply;
+    z-index: 2;
+    border-radius: 10px;
+  }
+  
+  .movie_card .info_section .movie_header {
+    position: relative;
+    padding-left: 25px;
+    padding-top: 15px;
+  }
+  
+  .movie_card .info_section .movie_header h1 {
+    color: black;
+    font-weight: 200;
+  }
+  
+  .movie_card .info_section .movie_header h4 {
+    color: #555;
+    font-weight: 200;
+  }
+  
+  .movie_card .info_section .movie_header .minutes {
+    display: inline-block;
+    margin-top: 15px;
+    color: #555;
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+  }
+  
+  .movie_card .info_section .movie_header .type {
+    display: inline-block;
+    color: #959595;
+    margin-left: 10px;
+  }
+  
+  .movie_card .info_section .movie_header .locandina {
+    position: relative;
+    float: left;
+    margin-right: 20px;
+    height: 220px;
+    box-shadow: 0 0 20px -10px rgba(0, 0, 0, 0.5);
+  }
+  
+  .movie_card .info_section .movie_desc {
+    padding: 15px;
+    font-size: 12px;
+  }
+  
+  .movie_card .info_section .movie_rating {
+    padding-left: 15px;
+  }
+  
+  .movie_card .info_section .movie_rating {
+    cursor: pointer;
+  }
+  
+  .movie_card .info_section .movie_rating .rating-start-title {
+    font-size: 15px;
+    font-weight: bold;
+    padding-right: 10px;
+    cursor: pointer;
+  }
+  
+  .movie_card .info_section .movie_desc .text {
+    color: #545454;
+  }
+  
+  .movie_card .blur_back {
+    position: absolute;
+    top: 0;
+    z-index: 1;
+    height: 100%;
+    right: 0;
+    background-size: cover;
+    border-radius: 11px;
+  }
+  
+  @media screen and (min-width: 768px) {
+    .movie_card .movie_header {
+      width: 65%;
+    }
+    .movie_card{
+        width: 700px;
+        margin: 0 auto;
+    }
+  
+    .movie_card .movie_desc {
+      width: 50%;
+    }
+  
+    .movie_card .info_section {
+      background: linear-gradient(to right, #e5e6e6 50%, transparent 100%);
+    }
+  
+    .movie_card .blur_back {
+      width: 80%;
+      background-position: -100% 10% !important;
+    }
+  }
+  
+  @media screen and (max-width: 768px) {
+    .movie_card {
+      width: 95%;
+      margin: 70px auto;
+      min-height: 40px;
+      height: auto;
+    }
+  
+    .movie_card .blur_back {
+      width: 100%;
+      background-position: 50% 50% !important;
+    }
+  
+    .movie_card .movie_header {
+      width: 100%;
+    }
+  
+    .movie_card .movie_desc {
+      width: 100%;
+    }
+  
+    .movie_card .info_section {
+      background: linear-gradient(to top, #e5e6e6 50%, transparent 100%);
+      display: inline-grid;
+    }
+  }
+  
+ 
+  
+  .bright_back {
+    
+    background: url("https://www.gannett-cdn.com/-mm-/c03fd140debe8ad4c05cf81a5cad7ad61a12ce52/c=0-1580-2985-3266&r=x803&c=1600x800/local/-/media/2017/06/09/USATODAY/USATODAY/636326272873599176-Black-Panther-Teaser.jpg");
+    background-size: cover;
+
+  }
+  

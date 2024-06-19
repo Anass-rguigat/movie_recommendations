@@ -15,9 +15,9 @@ class DatabaseSeeder extends Seeder
     {
         // User::factory(50)->create();
 
-        for ($i = 1; $i <= 50; $i++) {
+        for ($i = 1; $i <= 700; $i++) {
             User::factory()->create([
-                'email' => 'user' . $i . '@exmpl.com',
+                'email' => 'user' . $i . '@exmple.com',
             ]);
         }
 

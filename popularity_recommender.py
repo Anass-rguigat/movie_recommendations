@@ -14,7 +14,7 @@ class PopularityRecommender:
         R = x['ratings_mean']
         return (V/(V+m)*R) + (m/(m+V)* C)
                 
-    def recommend_items(self, user_id, items_to_ignore=[], topn=10, verbose=False):
+    def recommend_items(self, user_id, items_to_ignore=[], topn=100, verbose=False):
         C = self.popularities_df['ratings_mean'].mean()
         
         self.popularities_df['predicted_rating'] = self.popularities_df.apply(lambda x: self.weighted_rating(x,10,C), axis=1) 

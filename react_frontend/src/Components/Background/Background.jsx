@@ -29,7 +29,7 @@ const Background = ({ heroData, playStatus, heroCount }) => {
                 <iframe
                 className='background fade-in'
                 style={{ filter : 'brightness(1)'}}
-                src={`https://www.youtube.com/embed/${videoKey}?autoplay=1&loop=1&controls=0&showinfo=0`}
+                src={`https://www.youtube.com/embed/${videoKey}?autoplay=1&loop=1&controls=0&showinfo=0&vq=hd1080`}
                 frameBorder="0"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen"
                 allowFullScreen

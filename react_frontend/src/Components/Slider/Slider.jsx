@@ -19,7 +19,7 @@ const Slider = () => {
     const fetchRecommendations = async () => {
       try {
         const data = await getPopularityRecommendations();
-        setMovie(data);
+        setMovie(data.slice(0, 10));
         // console.log(data);
         // data[0].genres.map(genre => console.log(genre.name))
       } catch (error) {
@@ -60,6 +60,7 @@ const Slider = () => {
       {/* backdrop image and movies informations */}
       <div className="list">
         {movies.map((movie, index) => (
+           
           <div key={index} className={index === itemActive ? "item active" : "item"}>
             <img src={`https://image.tmdb.org/t/p/original${movie.backdrop_path}`} alt={`Slider ${index + 1}`} />
             <div className="content">
