@@ -47,6 +47,7 @@ const Navbar = () => {
             <ul className={`nav-menu ${menuOpen ? 'open' : ''}`}>
                 <li className='nav-link'> <Link to="/">Recommend</Link></li>
                 <li className='nav-link'><Link to="/top-10">Top 10</Link></li>
+                <li className='nav-link'><Link to="/wallet">Wallet</Link></li>
                 <button onClick={handleLogout}>
                 <div className="text">
                         <span>logout</span>

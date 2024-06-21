@@ -4,6 +4,7 @@ import './MovieDetails.css';
 import video1 from '../../assets/video1.mp4';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar, faStarHalfAlt, faStar as farStar } from '@fortawesome/free-solid-svg-icons';
+
 // -=-=-==- 
 // import { faStar as fasStar, faStarHalfAlt, faStar as farStar } from '@fortawesome/free-solid-svg-icons';
 // import { faStar as fasStar, faStarHalfAlt } from '@fortawesome/free-solid-svg-icons';
@@ -29,6 +30,8 @@ const MovieDetails = ({movie}) => {
   const divBackgroundRef = useRef(null);
 
   useEffect(() => {
+    console.log(movie);
+    console.log(movie.ratings_mean);
     const fetchData = async () => {
       try {
         // Fetch actors data
@@ -88,40 +91,7 @@ const MovieDetails = ({movie}) => {
     
   // };
 
-  // const handleRating = async (rate) => {
-  //   // const confirmRating = window.confirm(`Are you sure you want to give this movie a rating of ${rate} stars?`);
-  //   const confirmRating = false
-  
-    
-  //   if (confirmRating) {
-  //     setRating(rate);
-  //     console.log(rate);
-  
-  //     // Get the user ID from local storage
-  //     const userId = localStorage.getItem('userId');
-  //     if (!userId) {
-  //       console.error('User ID not found in local storage');
-  //       return;
-  //     }
-  
-  //     // Prepare the data to send
-  //     const ratingData = {
-  //       userId: parseInt(userId, 10),  // Ensure userId is a number
-  //       movieId: movie.id,
-  //       rating: rate
-  //     };
-  
-  //     try {
-  //       // Send the rating data to the API
-  //       const response = await axios.post('http://localhost:5000/add-rating', ratingData);
-  //       console.log('Rating response:', response.data);
-  //     } catch (error) {
-  //       console.error('Error sending rating data:', error);
-  //     }
-  //   }
-  // };
-
-
+// -=-= -=-= -=- =-=-=- =- =- =- =- =-=-= -
 
 const handleRating = async (rate) => {
   const swalWithBootstrapButtons = Swal.mixin({
@@ -146,16 +116,19 @@ const handleRating = async (rate) => {
   if (result.isConfirmed) {
     setRating(rate);
 
-    // Get the user ID from local storage
     const userId = localStorage.getItem('userId');
     if (!userId) {
-      console.log(userId)
       console.error('User ID not found in local storage');
       return;
     }
 
-    // Prepare the data to send
-    const ratingData = {
+    const ratingDataDB = {
+      user_id: parseInt(userId, 10), 
+      tmdb_id: movie.id,            
+      rating: rate
+    };
+
+    const ratingDataCSV = {
       userId: parseInt(userId, 10),  // Ensure userId is a number
       movieId: movie.id,
       rating: rate
@@ -163,17 +136,28 @@ const handleRating = async (rate) => {
 
     try {
       // Send the rating data to the API
-      const response = await axios.post('http://localhost:5000/add-rating', ratingData);
+      const response = await axios.post('http://localhost:5000/add-rating', ratingDataCSV);
       console.log('Rating response:', response.data);
     } catch (error) {
       console.error('Error sending rating data:', error);
     }
 
-    swalWithBootstrapButtons.fire(
-      'Rated!',
-      'Your rating has been recorded.',
-      'success'
-    );
+    try {
+      const response = await axios.post('http://localhost:8000/api/rate-movie', ratingDataDB);
+      console.log('Rating response:', response.data);
+      swalWithBootstrapButtons.fire(
+        'Rated!',
+        'Your rating has been recorded.',
+        'success'
+      );
+    } catch (error) {
+      console.error('Error sending rating data:', error);
+      swalWithBootstrapButtons.fire(
+        'Error',
+        'There was an error recording your rating.',
+        'error'
+      );
+    }
   } else if (result.dismiss === Swal.DismissReason.cancel) {
     swalWithBootstrapButtons.fire(
       'Cancelled',
@@ -183,6 +167,8 @@ const handleRating = async (rate) => {
   }
 };
 
+
+// -=-=- =- =- =- = -= - =- =- =- =- = -=- = = -
 
   const handleBackgroundVisibility = () => {
     const backgroundDiv = backgroundRef.current;
@@ -271,11 +257,15 @@ const handleRating = async (rate) => {
                 {/* <small><span style={{'color' : '#cdc9c9'}}>(</span> {movie.ratings_mean} <span style={{'color' : '#cdc9c9'}}>/</span> {movie.vote_count} <span style={{'color' : '#cdc9c9'}}>)</span></small> */}
                 <small><span style={{'color' : '#cdc9c9'}}>( </span> 
                 {/* {movie.ratings_mean.toFixed(2)}  */}
-                {movie.ratings_mean !== undefined && movie.ratings_mean !== null 
-                ? movie.ratings_mean.toFixed(2) 
-                : movie.average_rating !== undefined && movie.average_rating !== null 
+                {
+                  movie.ratings_mean !== undefined && movie.ratings_mean !== null 
+                  ? movie.ratings_mean.toFixed(2) 
+                  : movie.average_rating !== undefined && movie.average_rating !== null 
                   ? movie.average_rating.toFixed(2) 
-                  : 'N/A'}
+                  : movie.vote_average !== undefined && movie.vote_average !== null
+                  ? (movie.vote_average / 2).toFixed(2)
+                  : 'N/A'
+                }
                     
                     <FontAwesomeIcon icon={farStarr} className="star" color="#ffc107" style={{ marginLeft: '3px' }} />
                     {/* <FontAwesomeIcon icon={fasStar} className="star" color="#ffc107" style={{ marginLeft: '5px' }} /> */}

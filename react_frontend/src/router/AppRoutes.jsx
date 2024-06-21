@@ -7,6 +7,7 @@ import Logout from '../pages/Auth/Login';
 import Register from '../pages/Auth/Register';
 import { AuthProvider } from '../contexts/AuthContext';
 import Test from '../pages/Test';
+import MoviesWallet from '../pages/Saves/MoviesWallet';
 const AppRoutes = () => {
   return (
     <AuthProvider>
@@ -19,6 +20,7 @@ const AppRoutes = () => {
           <Route path="/logout" element={<Logout />} />
           <Route path="/register" element={<Register />} />
           <Route path="/test" element={<Test />} />
+          <Route path="/wallet" element={<MoviesWallet />} />
         </Routes>
       </Router>
       </AuthProvider>

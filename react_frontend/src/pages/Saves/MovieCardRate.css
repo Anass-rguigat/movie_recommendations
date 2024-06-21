@@ -23,7 +23,7 @@
 /* Card container */
 .Card {
     background-color: #0e0d12;
-    
+    padding-top: 70px;
 }
 
 .Card h1 {
@@ -247,4 +247,11 @@
     .Card .container .movie-cards {
         flex-basis: calc(100% - 20px); /* Set flex basis to occupy 100% of the container width minus the gap */
     }
+}
+
+
+.emptyRatedMovieP{
+    color: rgb(194, 126, 0);
+    letter-spacing: 2px;
+    font-size: 17px;
 }
