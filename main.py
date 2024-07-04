@@ -6,6 +6,7 @@ from model_evaluator import ModelEvaluator
 from popularity_recommender import PopularityRecommender
 from content_based import ContentBasedRecommender
 from collaborative import CFRecommender  
+from base import Based
 from hybrid import HybridRecommender 
 from sklearn.feature_extraction.text import CountVectorizer
 from scipy.sparse.linalg import svds
@@ -62,6 +63,7 @@ expended_movies_df['soup'] = expended_movies_df.apply(lambda x: fill_empty_tag(x
 count = CountVectorizer(stop_words='english')
 count_matrix = count.fit_transform(expended_movies_df['soup'])
 content_based_recommender_model = ContentBasedRecommender(expended_movies_df['movieId'].values.tolist(), count_matrix, training_data, testing_data)
+content_based_recommender_model_tags_title = Based(expended_movies_df['movieId'].values.tolist(), count_matrix, expended_movies_df)
 
 # Popularity-based filtering
 popularity = ratings.groupby('movieId').agg({'rating': ['mean', 'count']}).reset_index()
@@ -146,6 +148,28 @@ def recommendation_content():
         logging.error(f"Error in recommendation_content based: {e}")
         return jsonify({'error': 'Internal Server Error'}), 500
 
+@app.route('/recommendations-content_based-byTagsOrTitle', methods=['POST'])
+def recommendation_content_ByTagsOrTitle():
+    try:
+        input_str = request.json['input_str']
+        logging.debug(f"Input string received: {input_str}")
+        
+        # Assuming content_based_recommender_model_tags_title.recommend_items() handles input_str correctly
+        cbtt = content_based_recommender_model_tags_title.recommend_items(input_str)
+        
+        links = pd.read_csv('ml-latest/links.csv', header=0)
+        links = links[['movieId', 'tmdbId']]
+        cbtt = pd.merge(cbtt, links, on='movieId', how='left')
+        cbtt['tmdbId'] = cbtt['tmdbId'].fillna(0).astype(int)
+        
+        cbtt_dict = cbtt.to_dict(orient='records')
+        return jsonify(cbtt_dict), 200
+    except KeyError as ke:
+        logging.error(f"KeyError in recommendation_content based by tags or title: {ke}")
+        return jsonify({'error': 'Invalid input format.'}), 400
+    except Exception as e:
+        logging.error(f"Error in recommendation_content based by tags or title: {e}")
+        return jsonify({'error': 'Internal Server Error'}), 500
 @app.route('/recommendations-collaborative', methods=['POST'])
 def recommendation_collaborative():
     try:
